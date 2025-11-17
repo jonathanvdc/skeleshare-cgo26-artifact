@@ -15,7 +15,8 @@ mkdir -p results
 docker run --rm -it --mount type=bind,src=./results,dst=/workspace/results skeleshare-eval
 ```
 
-This will invoke the evaluation script, which executes **all EqSat and lowering experiments** across all three SHIR branches (`new-test-tag`, `new-test-tag-y`, `eqsat-nn-extra-sync`). Each experiment produces outputs in:
+This will invoke the evaluation script, which executes all EqSat and VHDL generation experiments.
+Each experiment produces outputs in:
 
 ```
 /workspace/results/<experiment-id>/eqsat/
@@ -87,7 +88,7 @@ For **EqSat experiments**, unit tests typically generate a single textual output
 results/<experiment-id>/eqsat/
 ```
 
-For **lowering experiments**, tests generate an `out/NAME` directory containing HDL outputs. The script cleans any previous `out/` directory, runs the test, and copies the resulting directory into:
+For **VHDL generation experiments**, tests generate an `out/NAME` directory containing VHDL outputs. The script cleans any previous `out/` directory, runs the test, and copies the resulting directory into:
 
 ```
 results/<experiment-id>/lowering/out/
