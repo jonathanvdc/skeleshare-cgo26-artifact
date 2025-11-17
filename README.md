@@ -15,6 +15,9 @@ VHDL code for all experiments can be generated using a single command inside the
 
 ## Step-By-Step Instructions
 
+The steps below walk you through the complete workflow for evaluating SkeleShare using our Docker image and server setup.
+You'll connect to the server, pull the artifact's Docker container, generate VHDL for all experiments, and run the pre-synthesized designs on the provided Arria-10 FPGA.
+
 ### 1. Access the server
 
 We have created temporary institutional server accounts for CGO Artifact Evaluation and provided the private SSH keys to the CGO chairs. As an evaluator, you will receive one private key along with a username in the format `csuser<NUM>`.
@@ -87,7 +90,11 @@ GOP/s : 169.936
 
 ---
 
-## Additional options
+## Additional Options
+
+The commands above reproduce the default artifact workflow, but the evaluation harness also supports several optional paths.
+These include re-running equality saturation from scratch, re-synthesizing hardware designs with Quartus, or executing only a selected subset of experiments.
+The options below are independent of the main workflow and can be used as needed to inspect intermediate outputs.
 
 ### Re-Running Equality Saturation
 
