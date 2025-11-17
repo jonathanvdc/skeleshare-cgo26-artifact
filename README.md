@@ -19,7 +19,10 @@ The Docker image in this artifact reproduces the experiments from the paper, inc
 - experiments under constrained DSP budgets.
 
 VHDL code for all experiments can be generated using a single command inside the container, and results are written to the local `results/` directory for inspection and further processing.
-## 1. Access the server
+
+## Step-By-Step Instructions
+
+### 1. Access the server
 
 We have created temporary institutional server accounts for CGO Artifact Evaluation and provided the private SSH keys to the CGO chairs. As an evaluator, you will receive one private key along with a username in the format `csuser<NUM>`.
 
@@ -27,112 +30,40 @@ We have created temporary institutional server accounts for CGO Artifact Evaluat
 ```bash
 ssh-add path/to/private-key
 ```
+
 **II. Connect to our server via the institutional jump host**
 ```bash
 ssh -A -J your-username@jump.cs.mcgill.ca your-username@solaire.cs.mcgill.ca
 ```
 Once connected, you will have access to all required hardware on our server, including the Intel Arria 10 FPGA board used for the evaluation. You may directly compile and run the provided designs on the physical hardware.
 
-
-
-## 2. Build the image
+### 2. Pull the Docker image
 
 ```bash
-docker build -t skeleshare-eval .
+docker pull ghcr.io/jonathanvdc/skeleshare-cgo26-artifact:latest
 ```
 
-## 3. Run the container with mounted results
+### 3. Run the container with mounted results
 
 Create a local results directory and mount it into the container so that all outputs are available on your host machine:
 
 ```bash
 mkdir -p results
-docker run --rm -it --mount type=bind,src=./results,dst=/workspace/results skeleshare-eval
+docker run --rm -it \
+  --mount type=bind,src=./results,dst=/workspace/results \
+  ghcr.io/jonathanvdc/skeleshare-cgo26-artifact:latest
 ```
 
-This will invoke the evaluation script, which executes all EqSat and VHDL generation experiments.
-Each experiment produces outputs in:
+This will invoke the evaluation script to produce a VHDL design for each experiment to which equality saturation finds a solution.
+The VHDL code for each experiment is stored in:
 
 ```
-/workspace/results/<experiment-id>/eqsat/
-/workspace/results/<experiment-id>/lowering/
+./results/<experiment-id>/lowering/
 ```
 
-Because the container was launched with a bind mount:
+### 4. Running Quartus Synthesis
 
-```
-./results → /workspace/results
-```
-
-you will find all outputs on the host machine under the local `results/` directory.
-
----
-
-## 4. Running only specific phases
-
-Run **only the EqSat phases**:
-
-```bash
-python3 evaluation.py --phase eqsat
-```
-
-Run **only the lowering phases**:
-
-```bash
-python3 evaluation.py --phase lowering
-```
-
-Run both phases (default):
-
-```bash
-python3 evaluation.py --phase both
-```
-
----
-
-## 5. Running only selected experiments
-
-You may restrict execution to a comma‑separated list of experiment IDs, e.g.:
-
-```bash
-python3 evaluation.py --only 1-vgg,3-tinyyolo,16-vgg-skeleshare-1abstr
-```
-
-A full list of experiment IDs is defined in `evaluation.py` and corresponds to the experiments in the artifact appendix:
-
-- `1-vgg`
-- `3-tinyyolo`
-- `6-self-attention`
-- `10-stencil-4stage`
-- `11-stencil-baseline`
-- `12-vgg-no-sharing`
-- `13-vgg-no-padding`
-- `14-vgg-no-tiling`
-- `15-vgg-baseline-no-sharing`
-- `16-vgg-skeleshare-1abstr`
-- `17-vgg-quarter-dsps`
-- `19-vgg-half-dsps`
-
----
-
-## 6. Where outputs appear
-
-For **EqSat experiments**, unit tests typically generate a single textual output (e.g., `vggexpr.txt`) inside their respective SHIR repo directory. The evaluation script automatically detects and copies those files to:
-
-```
-results/<experiment-id>/eqsat/
-```
-
-For **VHDL generation experiments**, tests generate an `out/NAME` directory containing VHDL outputs. The script cleans any previous `out/` directory, runs the test, and copies the resulting directory into:
-
-```
-results/<experiment-id>/lowering/out/
-```
-
-
-## 7. Running Quartus Synthesis
-
-Once all VHDL files are generated for an experiment, you can synthesize them using **Quartus**. To do so, navigate to the `lowering` folder of the desired experiment and run:
+Once all VHDL files are generated for an experiment, you can synthesize them using Quartus. For each experiment, navigate to the `lowering` folder of the desired experiment and run:
 
 ```bash
 source /mnt/sdc1/examples/profile
@@ -172,3 +103,43 @@ source /mnt/sdc1/examples/profile
 
 This will directly execute the pre-synthesized hardware design on the FPGA board.
 
+
+
+---
+
+## Additional options
+
+### Running specific phases
+
+Since optimizing each benchmark using equality saturation takes multiple hours, the commands above use a precomputed solution embedded in the container.
+To recompute this solution and place it in `./results/<experiment-id>/eqsat/`, run:
+
+```bash
+docker run --rm -it \
+  --mount type=bind,src=./results,dst=/workspace/results \
+  ghcr.io/jonathanvdc/skeleshare-cgo26-artifact:latest \
+  python3 evaluation.py --phase eqsat
+```
+
+## Running only selected experiments
+
+You may restrict execution to a comma‑separated list of experiment IDs, e.g.:
+
+```bash
+python3 evaluation.py --only 1-vgg,3-tinyyolo,16-vgg-skeleshare-1abstr
+```
+
+A full list of experiment IDs is defined in `evaluation.py` and corresponds to the experiments in the artifact appendix:
+
+- `1-vgg`
+- `3-tinyyolo`
+- `6-self-attention`
+- `10-stencil-4stage`
+- `11-stencil-baseline`
+- `12-vgg-no-sharing`
+- `13-vgg-no-padding`
+- `14-vgg-no-tiling`
+- `15-vgg-baseline-no-sharing`
+- `16-vgg-skeleshare-1abstr`
+- `17-vgg-quarter-dsps`
+- `19-vgg-half-dsps`
