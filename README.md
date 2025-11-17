@@ -19,15 +19,29 @@ The Docker image in this artifact reproduces the experiments from the paper, inc
 - experiments under constrained DSP budgets.
 
 VHDL code for all experiments can be generated using a single command inside the container, and results are written to the local `results/` directory for inspection and further processing.
+## 1. Access the server
+
+We have created temporary institutional server accounts for CGO Artifact Evaluation and provided the private SSH keys to the CGO chairs. As an evaluator, you will receive one private key along with a username in the format `csuser<NUM>`.
+
+**I. Add the SSH key to your local machine**
+```bash
+ssh-add path/to/private-key
+```
+**II. Connect to our server via the institutional jump host**
+```bash
+ssh -A -J your-username@jump.cs.mcgill.ca your-username@solaire.cs.mcgill.ca
+```
+Once connected, you will have access to all required hardware on our server, including the Intel Arria 10 FPGA board used for the evaluation. You may directly compile and run the provided designs on the physical hardware.
 
 
-## 1. Build the image
+
+## 2. Build the image
 
 ```bash
 docker build -t skeleshare-eval .
 ```
 
-## 2. Run the container with mounted results
+## 3. Run the container with mounted results
 
 Create a local results directory and mount it into the container so that all outputs are available on your host machine:
 
@@ -54,7 +68,7 @@ you will find all outputs on the host machine under the local `results/` directo
 
 ---
 
-## 3. Running only specific phases
+## 4. Running only specific phases
 
 Run **only the EqSat phases**:
 
@@ -76,7 +90,7 @@ python3 evaluation.py --phase both
 
 ---
 
-## 4. Running only selected experiments
+## 5. Running only selected experiments
 
 You may restrict execution to a comma‑separated list of experiment IDs, e.g.:
 
@@ -101,7 +115,7 @@ A full list of experiment IDs is defined in `evaluation.py` and corresponds to t
 
 ---
 
-## 5. Where outputs appear
+## 6. Where outputs appear
 
 For **EqSat experiments**, unit tests typically generate a single textual output (e.g., `vggexpr.txt`) inside their respective SHIR repo directory. The evaluation script automatically detects and copies those files to:
 
@@ -114,3 +128,47 @@ For **VHDL generation experiments**, tests generate an `out/NAME` directory cont
 ```
 results/<experiment-id>/lowering/out/
 ```
+
+
+## 7. Running Quartus Synthesis
+
+Once all VHDL files are generated for an experiment, you can synthesize them using **Quartus**. To do so, navigate to the `lowering` folder of the desired experiment and run:
+
+```bash
+source /mnt/sdc1/examples/profile
+cp -r /mnt/sdc1/examples/syntest/* .
+mkdir hw/rtl/generated
+mv *.vhd *.dat hw/rtl/generated/
+```
+
+This prepares all required files for Quartus synthesis. Now, start the synthesis for the current experiment:
+
+```bash
+./real.sh
+```
+
+Synthesis typically takes **4 to 8 hours** to complete. After it finishes, you can run the design on the actual FPGA board using:
+```bash
+./real_start.sh
+./real_sw.sh
+```
+
+The output will show **.... TODO: Finalize this for reports!**
+
+### Using Pre-Synthesized Designs (Recommended to Save Time)
+
+To avoid the long synthesis time, we also provide **pre-synthesized designs** that correspond exactly to the generated VHDL files for each experiment. These can be found under:
+```bash
+TODO: Update
+```
+
+Navigate to the directory for the chosen experiment, then run:
+
+```bash
+source /mnt/sdc1/examples/profile
+./real_start.sh
+./real_sw.sh
+```
+
+This will directly execute the pre-synthesized hardware design on the FPGA board.
+
