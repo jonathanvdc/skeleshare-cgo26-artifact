@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
     python3-psutil \
     python3-distro \
+    python3-z3 \
     pkg-config \
     libssl-dev \
     zlib1g-dev \
@@ -19,6 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libtinfo6 \
     libopenblas-dev \
  && rm -rf /var/lib/apt/lists/*
+
+# RUN pip3 install z3-solver
 
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
