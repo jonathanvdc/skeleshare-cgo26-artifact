@@ -109,7 +109,7 @@ def run_sbt_test(repo_dir: str, test_path: str) -> None:
     cmd = [
         "sbt",
         "-J-Xss32m",
-        ';set scalacOptions ++= Seq("-Wconf:cat=deprecation:silent") ; testOnly {}'.format(fqcn),
+        'testOnly {}'.format(fqcn),
     ]
     subprocess.run(cmd, cwd=repo_dir, check=True)
 
