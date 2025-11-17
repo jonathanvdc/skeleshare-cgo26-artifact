@@ -58,4 +58,4 @@ COPY . /workspace
 
 # Default command: run all eqsat and lowering.
 # Results are written to /workspace/results.
-CMD ["/bin/bash", "-lc", "set -euo pipefail; python3 evaluation.py"]
+CMD ["/bin/bash", "-lc", "set -euo pipefail; python3 workspace/evaluation.py"]
