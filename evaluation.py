@@ -248,11 +248,11 @@ EXPERIMENTS: List[Experiment] = [
         description="16. VGG, SkeleShare, 1 abstr",
         eqsat=PhaseConfig(
             branch="new-test-tag",
-            path="src/test/eqsat/nn/SingleVGGHalfDSPTest.scala",
+            path="src/test/eqsat/nn/SingleVGGHalfAbsTest.scala",
         ),
         lowering=PhaseConfig(
             branch="new-test-tag",
-            path="src/test/eqsat/nn/SingleVGGHalfAbsTest.scala",
+            path="src/test/eqsat/nn/VggConvHalfAbsTest.scala",
         ),
     ),
     Experiment(
