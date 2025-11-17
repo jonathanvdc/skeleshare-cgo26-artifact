@@ -3,12 +3,12 @@
 
 This repository provides a Docker image and automated evaluation harness for **SkeleShare**, the technique introduced in the CGO '26 paper *SkeleShare: Algorithmic Skeletons and Equality Saturation for Hardware Resource Sharing.*
 
-SkeleShare is a fully automated system for **resource allocation and hardware sharing** in functional FPGA compilation. It combines:
+SkeleShare is a fully automated system for resource allocation and hardware sharing in functional FPGA compilation. It combines:
 
-- a **multi-abstraction skeleton IR**,
-- **equality saturation** to explore all legal transformation sequences,
-- a **solver‑based extractor** that jointly decides allocation and sharing under device constraints,
-- and a structured **lowering pipeline** that targets the SHIR compiler and Intel FPGA toolchains.
+- a multi-abstraction skeleton IR,
+- equality saturation to explore all legal transformation sequences,
+- a solver‑based extractor that jointly decides allocation and sharing under device constraints,
+- and a structured lowering pipeline that targets the SHIR compiler and Intel FPGA toolchains.
 
 The Docker image in this artifact reproduces the paper's main results, which are found in Table III.
 VHDL code for all experiments can be generated using a single command inside the container, and results are written to the local `results/` directory for inspection and further processing.
@@ -54,12 +54,12 @@ The VHDL code for each experiment is stored in:
 ./results/<experiment-id>/lowering/
 ```
 
-### 4. Running Quartus Synthesis
+### 4. Running Synthesized Designs
 
-Since synthesis typically takes between **4 to 8 hours** to complete for the benchmarks in the paper, we provide pre-synthesized designs that correspond exactly to the generated VHDL files for each experiment.
+Since synthesis typically takes between **4 to 8 hours** for each benchmark in the paper, we provide pre-synthesized designs that correspond exactly to the generated VHDL files for each experiment.
 These can be found under:
 ```bash
-TODO: Update
+/mnt/sdc1/examples/cgo26_ae/<experiment-id>/
 ```
 
 To directly execute an experiment's pre-synthesized hardware design on the FPGA board, navigate to the experiment's directory and run the following commands:
@@ -70,26 +70,20 @@ source /mnt/sdc1/examples/profile
 ./real_sw.sh
 ```
 
-The output will show **.... TODO: Finalize this for reports!**
-
-### Using Pre-Synthesized Designs (Recommended to Save Time)
-
-To avoid the long synthesis time, we also provide **pre-synthesized designs** that correspond exactly to the generated VHDL files for each experiment. These can be found under:
-```bash
-TODO: Update
-```
-
-Navigate to the directory for the chosen experiment, then run:
+Finally, run the following script to summarize logic, RAM usage, DSP usage, and GOPS measurements taken in the previous step.
 
 ```bash
-source /mnt/sdc1/examples/profile
-./real_start.sh
-./real_sw.sh
+bash /mnt/sdc1/examples/scripts/<experiment-id>.sh
 ```
 
-This will directly execute the pre-synthesized hardware design on the FPGA board.
+The output adheres to the following format, which can be cross-referenced with Table III from the paper.
 
-
+```
+Logic utilization (in ALMs) : 207,520 / 427,200 ( 49 % )
+Total RAM Blocks : 943 / 2,713 ( 35 % )
+Total DSP Blocks : 1,152 / 1,518 ( 76 % )
+GOP/s : 169.936
+```
 
 ---
 
