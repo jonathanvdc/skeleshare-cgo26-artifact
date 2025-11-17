@@ -162,7 +162,7 @@ def run_lowering_phase(exp: Experiment, cfg: PhaseConfig) -> None:
         print("[WARN] Lowering phase did not produce an 'out' directory.")
         return
 
-    dest = os.path.join(RESULTS_DIR, exp.id, "vhdl")
+    dest = os.path.join(RESULTS_DIR, exp.id, "lowering")
     if os.path.exists(dest):
         shutil.rmtree(dest)
     print(f"Copying lowering outputs from {out_dir} to {dest}")
