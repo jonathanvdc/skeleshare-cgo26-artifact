@@ -165,8 +165,27 @@ def run_lowering_phase(exp: Experiment, cfg: PhaseConfig) -> None:
     dest = os.path.join(RESULTS_DIR, exp.id, "lowering")
     if os.path.exists(dest):
         shutil.rmtree(dest)
-    print(f"Copying lowering outputs from {out_dir} to {dest}")
-    shutil.copytree(out_dir, dest)
+    os.makedirs(dest, exist_ok=True)
+
+    # Find subdirectories inside out_dir
+    subdirs = [
+        d for d in os.listdir(out_dir)
+        if os.path.isdir(os.path.join(out_dir, d))
+    ]
+    if not subdirs:
+        print("[WARN] Lowering phase produced no subdirectory inside out/.")
+        return
+
+    src_dir = os.path.join(out_dir, subdirs[0])
+    print(f"Copying contents of {src_dir} to {dest}")
+
+    for item in os.listdir(src_dir):
+        s = os.path.join(src_dir, item)
+        d = os.path.join(dest, item)
+        if os.path.isdir(s):
+            shutil.copytree(s, d)
+        else:
+            shutil.copy2(s, d)
 
 
 EXPERIMENTS: List[Experiment] = [
