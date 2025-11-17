@@ -63,23 +63,16 @@ The VHDL code for each experiment is stored in:
 
 ### 4. Running Quartus Synthesis
 
-Once all VHDL files are generated for an experiment, you can synthesize them using Quartus. For each experiment, navigate to the `lowering` folder of the desired experiment and run:
+Since synthesis typically takes between **4 to 8 hours** to complete for the benchmarks in the paper, we provide pre-synthesized designs that correspond exactly to the generated VHDL files for each experiment.
+These can be found under:
+```bash
+TODO: Update
+```
+
+To directly execute an experiment's pre-synthesized hardware design on the FPGA board, navigate to the experiment's directory and run the following commands:
 
 ```bash
 source /mnt/sdc1/examples/profile
-cp -r /mnt/sdc1/examples/syntest/* .
-mkdir hw/rtl/generated
-mv *.vhd *.dat hw/rtl/generated/
-```
-
-This prepares all required files for Quartus synthesis. Now, start the synthesis for the current experiment:
-
-```bash
-./real.sh
-```
-
-Synthesis typically takes **4 to 8 hours** to complete. After it finishes, you can run the design on the actual FPGA board using:
-```bash
 ./real_start.sh
 ./real_sw.sh
 ```
@@ -109,7 +102,7 @@ This will directly execute the pre-synthesized hardware design on the FPGA board
 
 ## Additional options
 
-### Running specific phases
+### Re-Running Equality Saturation
 
 Since optimizing each benchmark using equality saturation takes multiple hours, the commands above use a precomputed solution embedded in the container.
 To recompute this solution and place it in `./results/<experiment-id>/eqsat/`, run:
@@ -121,7 +114,32 @@ docker run --rm -it \
   python3 evaluation.py --phase eqsat
 ```
 
-## Running only selected experiments
+### Re-Running Synthesis
+
+The server stores pre-synthesized designs corresponding to the generated VHDL files for each experiment.
+To re-synthesize these designs for an experiment after Step 3, use Quartus.
+For each experiment, navigate to the `results/lowering` folder of the desired experiment and run:
+
+```bash
+source /mnt/sdc1/examples/profile
+cp -r /mnt/sdc1/examples/syntest/* .
+mkdir hw/rtl/generated
+mv *.vhd *.dat hw/rtl/generated/
+```
+
+This prepares all required files for Quartus synthesis. Now, start the synthesis for the current experiment:
+
+```bash
+./real.sh
+```
+
+Synthesis typically takes 4 to 8 hours to complete. After it finishes, you can run the design on the FPGA board using:
+```bash
+./real_start.sh
+./real_sw.sh
+```
+
+### Running only selected experiments
 
 You may restrict execution to a comma‑separated list of experiment IDs, e.g.:
 
