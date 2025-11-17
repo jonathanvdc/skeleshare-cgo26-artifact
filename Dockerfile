@@ -51,9 +51,9 @@ RUN echo 'export JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))"
 WORKDIR /workspace
 
 # Clone SHIR repo branches into separate subdirectories
-RUN git clone -b new-test-tag --single-branch --recursive https://bitbucket.org/cdubach/shir /workspace/shir-new-test-tag \
- && git clone -b new-test-tag-y --single-branch --recursive https://bitbucket.org/cdubach/shir /workspace/shir-new-test-tag-y \
- && git clone -b eqsat-nn-extra-sync --single-branch --recursive https://bitbucket.org/cdubach/shir /workspace/shir-eqsat-nn-extra-sync
+RUN git clone -b new-test-tag --single-branch --depth 1 --recursive --shallow-submodules https://bitbucket.org/cdubach/shir /workspace/shir-new-test-tag \
+ && git clone -b new-test-tag-y --single-branch --depth 1 --recursive --shallow-submodules https://bitbucket.org/cdubach/shir /workspace/shir-new-test-tag-y \
+ && git clone -b eqsat-nn-extra-sync --single-branch --depth 1 --recursive --shallow-submodules https://bitbucket.org/cdubach/shir /workspace/shir-eqsat-nn-extra-sync
 
 # Precompile the test suites for all three branches
 RUN cd /workspace/shir-new-test-tag && sbt test:compile \
