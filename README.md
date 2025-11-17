@@ -1,4 +1,25 @@
 
+# SkeleShare Artifact Evaluation (CGO '26)
+
+This repository provides a Docker image and automated evaluation harness for **SkeleShare**, the technique introduced in the CGO '26 paper *SkeleShare: Algorithmic Skeletons and Equality Saturation for Hardware Resource Sharing.*
+
+SkeleShare is a fully automated system for **resource allocation and hardware sharing** in functional FPGA compilation. It combines:
+
+- a **multi-abstraction skeleton IR**,
+- **equality saturation** to explore all legal transformation sequences,
+- a **solver‑based extractor** that jointly decides allocation and sharing under device constraints,
+- and a structured **lowering pipeline** that targets the SHIR compiler and Intel FPGA toolchains.
+
+The Docker image in this artifact reproduces the experiments from the paper, including:
+
+- EqSat exploration for benchmarks,
+- VHDL generation for chosen extracted programs,
+- evaluation of neural network models (VGG, TinyYolo), self-attention, and stencil pipelines,
+- ablation studies (no sharing, no padding, no tiling, single‑abstraction), and
+- experiments under constrained DSP budgets.
+
+VHDL code for all experiments can be generated using a single command inside the container, and results are written to the local `results/` directory for inspection and further processing.
+
 
 ## 1. Build the image
 
