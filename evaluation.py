@@ -172,9 +172,11 @@ def run_lowering_phase(exp: Experiment, cfg: PhaseConfig) -> None:
         d for d in os.listdir(out_dir)
         if os.path.isdir(os.path.join(out_dir, d))
     ]
+
     if not subdirs:
-        print("[WARN] Lowering phase produced no subdirectory inside out/.")
-        return
+        raise RuntimeError(f"No subdirectories found in lowering output {out_dir}")
+    elif len(subdirs) > 1:
+        raise RuntimeError(f"Multiple subdirectories found in lowering output {out_dir}: {subdirs}")
 
     src_dir = os.path.join(out_dir, subdirs[0])
     print(f"Copying contents of {src_dir} to {dest}")
