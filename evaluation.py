@@ -298,7 +298,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--phase",
         choices=["eqsat", "lowering", "both"],
-        default="both",
+        default="lowering",
         help="Which phases to run for each experiment.",
     )
     return parser.parse_args()
