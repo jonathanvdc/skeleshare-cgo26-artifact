@@ -106,7 +106,12 @@ def copy_relative_paths(src_root: str, rel_paths: Set[str], dst_root: str) -> No
 def run_sbt_test(repo_dir: str, test_path: str) -> None:
     fqcn = fqcn_from_test_path(test_path)
     print(f"\n==> Running sbt testOnly {fqcn} in {repo_dir}")
-    subprocess.run(["sbt", "-J-Xss32m", "testOnly", fqcn], cwd=repo_dir, check=True)
+    cmd = [
+        "sbt",
+        "-J-Xss32m",
+        ';set scalacOptions ++= Seq("-Wconf:cat=deprecation:silent") ; testOnly {}'.format(fqcn),
+    ]
+    subprocess.run(cmd, cwd=repo_dir, check=True)
 
 
 def run_eqsat_phase(exp: Experiment, cfg: PhaseConfig) -> None:
