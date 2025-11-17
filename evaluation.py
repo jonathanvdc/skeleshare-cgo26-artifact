@@ -42,6 +42,8 @@ class PhaseConfig:
     branch: str
     # Scala test file path relative to the repo root
     path: str
+    # If True, a non-zero exit code from sbt is treated as an expected failure.
+    expect_failure: bool = False
 
 
 @dataclass
@@ -103,22 +105,35 @@ def copy_relative_paths(src_root: str, rel_paths: Set[str], dst_root: str) -> No
         shutil.copy2(src, dst)
 
 
-def run_sbt_test(repo_dir: str, test_path: str) -> None:
+def run_sbt_test(repo_dir: str, test_path: str, expect_failure: bool = False) -> None:
     fqcn = fqcn_from_test_path(test_path)
     print(f"\n==> Running sbt testOnly {fqcn} in {repo_dir}")
     cmd = [
         "sbt",
         "-J-Xss32m",
-        'testOnly {}'.format(fqcn),
+        f"testOnly {fqcn}",
     ]
-    subprocess.run(cmd, cwd=repo_dir, check=True)
+    result = subprocess.run(cmd, cwd=repo_dir)
+    if expect_failure:
+        if result.returncode == 0:
+            raise RuntimeError(
+                f"[ERROR] Expected sbt testOnly {fqcn} to fail, but it succeeded."
+            )
+        else:
+            print(
+                f"[INFO] sbt testOnly {fqcn} failed as expected "
+                f"(exit code {result.returncode})."
+            )
+    else:
+        if result.returncode != 0:
+            raise subprocess.CalledProcessError(result.returncode, cmd)
 
 
 def run_eqsat_phase(exp: Experiment, cfg: PhaseConfig) -> None:
     repo = shir_repo_dir(cfg.branch)
     print(f"\n==== EqSat phase: {exp.id} ({exp.description}) ====")
     before = snapshot_files(repo)
-    run_sbt_test(repo, cfg.path)
+    run_sbt_test(repo, cfg.path, expect_failure=cfg.expect_failure)
     after = snapshot_files(repo)
     new_files = after - before
 
@@ -218,6 +233,7 @@ EXPERIMENTS: List[Experiment] = [
         eqsat=PhaseConfig(
             branch="new-test-tag",
             path="src/test/eqsat/nn/SingleVGGNoSharingTest.scala",
+            expect_failure=True,
         ),
         lowering=None,
     ),
@@ -227,6 +243,7 @@ EXPERIMENTS: List[Experiment] = [
         eqsat=PhaseConfig(
             branch="new-test-tag",
             path="src/test/eqsat/nn/SingleVggNoPaddingTest.scala",
+            expect_failure=True,
         ),
         lowering=None,
     ),
@@ -236,6 +253,7 @@ EXPERIMENTS: List[Experiment] = [
         eqsat=PhaseConfig(
             branch="new-test-tag",
             path="src/test/eqsat/nn/SingleVGGNoTilingTest.scala",
+            expect_failure=True,
         ),
         lowering=None,
     ),
