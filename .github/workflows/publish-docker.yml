@@ -33,5 +33,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/skeleshare-cgo26-artifact:latest
-            ghcr.io/${{ github.repository_owner }}/skeleshare-cgo26-artifact:${{ github.sha }}
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ github.sha }}
