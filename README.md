@@ -1,7 +1,7 @@
 
 # SkeleShare Artifact Evaluation (CGO '26)
 
-This repository provides a Docker image and automated evaluation harness for **SkeleShare**, the technique introduced in the CGO '26 paper *SkeleShare: Algorithmic Skeletons and Equality Saturation for Hardware Resource Sharing.*
+This repository provides a Docker image and automated evaluation harness for **SkeleShare**, a technique introduced in the CGO '26 paper *SkeleShare: Algorithmic Skeletons and Equality Saturation for Hardware Resource Sharing.*
 
 SkeleShare is a fully automated system for resource allocation and hardware sharing in functional FPGA compilation. It combines:
 
