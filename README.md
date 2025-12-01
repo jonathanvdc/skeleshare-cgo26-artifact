@@ -140,7 +140,7 @@ Synthesis typically takes 4 to 8 hours to complete. After it finishes, you can r
 You may restrict execution to a comma‑separated list of experiment IDs, e.g.:
 
 ```bash
-python3 evaluation.py --only 1-vgg,3-tinyyolo,16-vgg-skeleshare-1abstr
+python3 evaluation.py --only 1-vgg,3-tinyyolo,14-vgg-skeleshare-1abstr
 ```
 
 A full list of experiment IDs is defined in `evaluation.py` and corresponds to the experiments in the artifact appendix:
