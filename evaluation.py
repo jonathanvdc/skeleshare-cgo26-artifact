@@ -228,8 +228,8 @@ EXPERIMENTS: List[Experiment] = [
         ),
     ),
     Experiment(
-        id="10-stencil-4stage",
-        description="10. 4-stage stencil",
+        id="8-stencil-4stage",
+        description="8. 4-stage stencil",
         eqsat=PhaseConfig(
             branch="eqsat-nn-extra-sync",
             path="src/test/eqsat/nnExtra/StencilTest.scala",
@@ -240,8 +240,8 @@ EXPERIMENTS: List[Experiment] = [
         ),
     ),
     Experiment(
-        id="11-stencil-baseline",
-        description="11. 4-stage stencil baseline",
+        id="9-stencil-baseline",
+        description="9. 4-stage stencil baseline",
         eqsat=None,
         lowering=PhaseConfig(
             branch="eqsat-nn-extra-sync",
@@ -249,8 +249,8 @@ EXPERIMENTS: List[Experiment] = [
         ),
     ),
     Experiment(
-        id="12-vgg-no-sharing",
-        description="12. VGG, no sharing",
+        id="10-vgg-no-sharing",
+        description="10. VGG, no sharing",
         eqsat=PhaseConfig(
             branch="new-test-tag",
             path="src/test/eqsat/nn/SingleVGGNoSharingTest.scala",
@@ -259,8 +259,8 @@ EXPERIMENTS: List[Experiment] = [
         lowering=None,
     ),
     Experiment(
-        id="13-vgg-no-padding",
-        description="13. VGG, no padding",
+        id="11-vgg-no-padding",
+        description="11. VGG, no padding",
         eqsat=PhaseConfig(
             branch="new-test-tag",
             path="src/test/eqsat/nn/SingleVggNoPaddingTest.scala",
@@ -269,8 +269,8 @@ EXPERIMENTS: List[Experiment] = [
         lowering=None,
     ),
     Experiment(
-        id="14-vgg-no-tiling",
-        description="14. VGG, no tiling",
+        id="12-vgg-no-tiling",
+        description="12. VGG, no tiling",
         eqsat=PhaseConfig(
             branch="new-test-tag",
             path="src/test/eqsat/nn/SingleVGGNoTilingTest.scala",
@@ -279,8 +279,8 @@ EXPERIMENTS: List[Experiment] = [
         lowering=None,
     ),
     Experiment(
-        id="15-vgg-baseline-no-sharing",
-        description="15. VGG, baseline, no sharing",
+        id="13-vgg-baseline-no-sharing",
+        description="13. VGG, baseline, no sharing",
         eqsat=None,
         lowering=PhaseConfig(
             branch="eqsat-nn-extra-sync",
@@ -288,8 +288,8 @@ EXPERIMENTS: List[Experiment] = [
         ),
     ),
     Experiment(
-        id="16-vgg-skeleshare-1abstr",
-        description="16. VGG, SkeleShare, 1 abstr",
+        id="14-vgg-skeleshare-1abstr",
+        description="14. VGG, SkeleShare, 1 abstr",
         eqsat=PhaseConfig(
             branch="new-test-tag",
             path="src/test/eqsat/nn/SingleVGGHalfAbsTest.scala",
@@ -300,8 +300,8 @@ EXPERIMENTS: List[Experiment] = [
         ),
     ),
     Experiment(
-        id="17-vgg-quarter-dsps",
-        description="17. VGG, 1/4 DSPs",
+        id="15-vgg-quarter-dsps",
+        description="15. VGG, 1/4 DSPs",
         eqsat=PhaseConfig(
             branch="new-test-tag",
             path="src/test/eqsat/nn/SingleVGGFourthDSPTest.scala",
@@ -312,8 +312,8 @@ EXPERIMENTS: List[Experiment] = [
         ),
     ),
     Experiment(
-        id="19-vgg-half-dsps",
-        description="19. VGG, 1/2 DSPs",
+        id="17-vgg-half-dsps",
+        description="17. VGG, 1/2 DSPs",
         eqsat=PhaseConfig(
             branch="new-test-tag",
             path="src/test/eqsat/nn/SingleVGGHalfDSPTest.scala",
