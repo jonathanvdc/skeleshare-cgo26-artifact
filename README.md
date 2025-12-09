@@ -143,7 +143,8 @@ You may restrict execution to a comma‑separated list of experiment IDs, e.g.:
 python3 evaluation.py --only 1-vgg,3-tinyyolo,14-vgg-skeleshare-1abstr
 ```
 
-A full list of experiment IDs is defined in `evaluation.py` and corresponds to the experiments in the artifact appendix:
+A full list of experiment IDs is defined in `evaluation.py` and corresponds to the experiments in the artifact appendix.
+These experiment IDs are:
 
 - `1-vgg`
 - `3-tinyyolo`
