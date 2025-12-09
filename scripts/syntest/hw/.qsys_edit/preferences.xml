@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences>
+ <debug showDebugMenu="0" />
+ <window width="1906" height="1123" x="-3" y="31" />
+ <generation path="" synthesis="VHDL" />
+</preferences>

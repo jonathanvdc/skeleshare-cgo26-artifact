@@ -1,0 +1,31 @@
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: Found pagesize 1048576 kB
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: Parsed kernel version: [3] . [10] . [0]  [pre-release: 957]
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: Feature private_reservations is present in this kernel
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: Feature noreserve_safe is present in this kernel
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: Feature map_hugetlb is present in this kernel
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: Kernel has MAP_PRIVATE reservations.  Disabling heap prefaulting.
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: Kernel supports MAP_HUGETLB
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: WARNING: LD_PRELOAD is incompatible with segment remapping
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: WARNING: Segment remapping has been DISABLED
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: setup_morecore(): heapaddr = 0x40000000
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: hugetlbfs_morecore(536875008) = ...
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: heapbase = 0x40000000, heaptop = 0x40000000, mapsize = 0, delta=536875008
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: Attempting to map 1073741824 bytes
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: ... = 0x40000000
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: hugetlbfs_morecore(0) = ...
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: heapbase = 0x40000000, heaptop = 0x60001000, mapsize = 40000000, delta=-536866816
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: ... = 0x60001000
+allocating memory page with 1048576000 bytes
+one word (cache line) in this buffer has 64 bytes
+VTP is not available
+buffer prepared
+waiting for fpga to finish ...
+768 writes requested.
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: hugetlbfs_morecore(1048715264) = ...
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: heapbase = 0x40000000, heaptop = 0x60001000, mapsize = 40000000, delta=511848448
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: Attempting to map 1073741824 bytes
+libhugetlbfs [solaire.cs.mcgill.ca:36769]: INFO: ... = 0x60001000
+result is correct!
+
+finished using FPGA after 0 seconds.
+accelerator required 35327 cycles, 1024 read requests (of which 0 pending), 768 write requests (of which 0 pending) for this task. Read request buffer was 114 times almost full. Write request buffer was 0 times almost full.

@@ -1,0 +1,578 @@
+<?xml version="1.0" ?>
+<spirit:component xmlns:altera="http://www.altera.com/XMLSchema/IPXact/extensions" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009">
+  <spirit:vendor>Altera Corporation</spirit:vendor>
+  <spirit:library>floating_point_dsp</spirit:library>
+  <spirit:name>fpdsp_block_0</spirit:name>
+  <spirit:version>17.1</spirit:version>
+  <spirit:busInterfaces>
+    <spirit:busInterface>
+      <spirit:name>aclr</spirit:name>
+      <spirit:busType spirit:vendor="altera" spirit:library="altera" spirit:name="conduit" spirit:version="17.1"></spirit:busType>
+      <spirit:slave></spirit:slave>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>aclr</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>aclr</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>associatedClock</spirit:name>
+          <spirit:displayName>associatedClock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="associatedClock">clk</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>associatedReset</spirit:name>
+          <spirit:displayName>associatedReset</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="associatedReset"></spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>prSafe</spirit:name>
+          <spirit:displayName>Partial Reconfiguration Safe</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="prSafe">false</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>ay</spirit:name>
+      <spirit:busType spirit:vendor="altera" spirit:library="altera" spirit:name="conduit" spirit:version="17.1"></spirit:busType>
+      <spirit:slave></spirit:slave>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ay</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>ay</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>associatedClock</spirit:name>
+          <spirit:displayName>associatedClock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="associatedClock">clk</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>associatedReset</spirit:name>
+          <spirit:displayName>associatedReset</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="associatedReset"></spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>prSafe</spirit:name>
+          <spirit:displayName>Partial Reconfiguration Safe</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="prSafe">false</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>az</spirit:name>
+      <spirit:busType spirit:vendor="altera" spirit:library="altera" spirit:name="conduit" spirit:version="17.1"></spirit:busType>
+      <spirit:slave></spirit:slave>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>az</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>az</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>associatedClock</spirit:name>
+          <spirit:displayName>associatedClock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="associatedClock">clk</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>associatedReset</spirit:name>
+          <spirit:displayName>associatedReset</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="associatedReset"></spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>prSafe</spirit:name>
+          <spirit:displayName>Partial Reconfiguration Safe</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="prSafe">false</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>clk</spirit:name>
+      <spirit:busType spirit:vendor="altera" spirit:library="altera" spirit:name="conduit" spirit:version="17.1"></spirit:busType>
+      <spirit:slave></spirit:slave>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>clk</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>clk</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>associatedClock</spirit:name>
+          <spirit:displayName>associatedClock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="associatedClock">clk</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>associatedReset</spirit:name>
+          <spirit:displayName>associatedReset</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="associatedReset"></spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>prSafe</spirit:name>
+          <spirit:displayName>Partial Reconfiguration Safe</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="prSafe">false</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>ena</spirit:name>
+      <spirit:busType spirit:vendor="altera" spirit:library="altera" spirit:name="conduit" spirit:version="17.1"></spirit:busType>
+      <spirit:slave></spirit:slave>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>ena</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>ena</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>associatedClock</spirit:name>
+          <spirit:displayName>associatedClock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="associatedClock">clk</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>associatedReset</spirit:name>
+          <spirit:displayName>associatedReset</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="associatedReset"></spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>prSafe</spirit:name>
+          <spirit:displayName>Partial Reconfiguration Safe</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="prSafe">false</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>result</spirit:name>
+      <spirit:busType spirit:vendor="altera" spirit:library="altera" spirit:name="conduit" spirit:version="17.1"></spirit:busType>
+      <spirit:slave></spirit:slave>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>result</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>result</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>associatedClock</spirit:name>
+          <spirit:displayName>associatedClock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="associatedClock">clk</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>associatedReset</spirit:name>
+          <spirit:displayName>associatedReset</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="associatedReset"></spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>prSafe</spirit:name>
+          <spirit:displayName>Partial Reconfiguration Safe</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="prSafe">false</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+      <spirit:vendorExtensions>
+        <altera:altera_assignments>
+          <spirit:parameters>
+            <spirit:parameter>
+              <spirit:name>ui.blockdiagram.direction</spirit:name>
+              <spirit:value spirit:format="string" spirit:id="ui.blockdiagram.direction">OUTPUT</spirit:value>
+            </spirit:parameter>
+          </spirit:parameters>
+        </altera:altera_assignments>
+      </spirit:vendorExtensions>
+    </spirit:busInterface>
+  </spirit:busInterfaces>
+  <spirit:model>
+    <spirit:views>
+      <spirit:view>
+        <spirit:name>QUARTUS_SYNTH</spirit:name>
+        <spirit:envIdentifier>:quartus.altera.com:</spirit:envIdentifier>
+        <spirit:modelName>altera_fpdsp_block</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>QUARTUS_SYNTH</spirit:localName>
+        </spirit:fileSetRef>
+      </spirit:view>
+    </spirit:views>
+    <spirit:ports>
+      <spirit:port>
+        <spirit:name>clk</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC</spirit:typeName>
+              <spirit:viewNameRef>QUARTUS_SYNTH</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>ena</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC</spirit:typeName>
+              <spirit:viewNameRef>QUARTUS_SYNTH</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>aclr</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC</spirit:typeName>
+              <spirit:viewNameRef>QUARTUS_SYNTH</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>result</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left>0</spirit:left>
+            <spirit:right>31</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC_VECTOR</spirit:typeName>
+              <spirit:viewNameRef>QUARTUS_SYNTH</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>ay</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left>0</spirit:left>
+            <spirit:right>31</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC_VECTOR</spirit:typeName>
+              <spirit:viewNameRef>QUARTUS_SYNTH</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>az</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left>0</spirit:left>
+            <spirit:right>31</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>STD_LOGIC_VECTOR</spirit:typeName>
+              <spirit:viewNameRef>QUARTUS_SYNTH</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+    </spirit:ports>
+  </spirit:model>
+  <spirit:vendorExtensions>
+    <altera:entity_info>
+      <spirit:vendor>Altera Corporation</spirit:vendor>
+      <spirit:library>floating_point_dsp</spirit:library>
+      <spirit:name>altera_fpdsp_block</spirit:name>
+      <spirit:version>17.1</spirit:version>
+    </altera:entity_info>
+    <altera:altera_module_parameters>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>design_env</spirit:name>
+          <spirit:displayName>design_env</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="design_env">NATIVE</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>OPERATION</spirit:name>
+          <spirit:displayName>DSP Template</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="OPERATION">sp_mult</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>VIEW</spirit:name>
+          <spirit:displayName>View</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="VIEW">Register Clears</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>single_clear</spirit:name>
+          <spirit:displayName>Use Single Clear</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="single_clear">true</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ax_clock</spirit:name>
+          <spirit:displayName>ax_clock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="ax_clock">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ay_clock</spirit:name>
+          <spirit:displayName>ay_clock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="ay_clock">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>az_clock</spirit:name>
+          <spirit:displayName>az_clock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="az_clock">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>output_clock</spirit:name>
+          <spirit:displayName>output_clock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="output_clock">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>accumulate_clock</spirit:name>
+          <spirit:displayName>accumulate_clock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="accumulate_clock">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ax_chainin_pl_clock</spirit:name>
+          <spirit:displayName>ax_chainin_pl_clock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="ax_chainin_pl_clock">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>accum_pipeline_clock</spirit:name>
+          <spirit:displayName>accum_pipeline_clock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="accum_pipeline_clock">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>mult_pipeline_clock</spirit:name>
+          <spirit:displayName>mult_pipeline_clock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="mult_pipeline_clock">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>adder_input_clock</spirit:name>
+          <spirit:displayName>adder_input_clock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="adder_input_clock">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>adder_input_2_clock</spirit:name>
+          <spirit:displayName>adder_input_2_clock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="adder_input_2_clock">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>accum_adder_clock</spirit:name>
+          <spirit:displayName>accum_adder_clock</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="accum_adder_clock">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ax_clock_derived</spirit:name>
+          <spirit:displayName>ax_clock_derived</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="ax_clock_derived">NONE</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ay_clock_derived</spirit:name>
+          <spirit:displayName>ay_clock_derived</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="ay_clock_derived">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>az_clock_derived</spirit:name>
+          <spirit:displayName>az_clock_derived</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="az_clock_derived">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>output_clock_derived</spirit:name>
+          <spirit:displayName>output_clock_derived</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="output_clock_derived">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>accumulate_clock_derived</spirit:name>
+          <spirit:displayName>accumulate_clock_derived</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="accumulate_clock_derived">NONE</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ax_chainin_pl_clock_derived</spirit:name>
+          <spirit:displayName>ax_chainin_pl_clock_derived</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="ax_chainin_pl_clock_derived">NONE</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>accum_pipeline_clock_derived</spirit:name>
+          <spirit:displayName>accum_pipeline_clock_derived</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="accum_pipeline_clock_derived">NONE</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>mult_pipeline_clock_derived</spirit:name>
+          <spirit:displayName>mult_pipeline_clock_derived</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="mult_pipeline_clock_derived">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>adder_input_clock_derived</spirit:name>
+          <spirit:displayName>adder_input_clock_derived</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="adder_input_clock_derived">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>accum_adder_clock_derived</spirit:name>
+          <spirit:displayName>accum_adder_clock_derived</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="accum_adder_clock_derived">NONE</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>adder_subtract</spirit:name>
+          <spirit:displayName>adder_subtract</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="adder_subtract">false</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>chain_mux</spirit:name>
+          <spirit:displayName>chain_mux</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="chain_mux">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>chain_out_mux</spirit:name>
+          <spirit:displayName>chain_out_mux</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="chain_out_mux">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>possible_registers</spirit:name>
+          <spirit:displayName>possible_registers</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="possible_registers">ay_clock,az_clock,output_clock,mult_pipeline_clock</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>total_clks_used</spirit:name>
+          <spirit:displayName>total_clks_used</spirit:displayName>
+          <spirit:value spirit:format="long" spirit:id="total_clks_used">1</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>clk0_used</spirit:name>
+          <spirit:displayName>clk0_used</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="clk0_used">true</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>clk1_used</spirit:name>
+          <spirit:displayName>clk1_used</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="clk1_used">false</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>clk2_used</spirit:name>
+          <spirit:displayName>clk2_used</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="clk2_used">false</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>use_chainin</spirit:name>
+          <spirit:displayName>use_chainin</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="use_chainin">false</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>use_chainout</spirit:name>
+          <spirit:displayName>use_chainout</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="use_chainout">true</spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </altera:altera_module_parameters>
+    <altera:altera_system_parameters>
+      <spirit:parameters>
+        <spirit:parameter>
+          <spirit:name>device</spirit:name>
+          <spirit:displayName>Device</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="device">10AX115N2F40E2LG</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>deviceFamily</spirit:name>
+          <spirit:displayName>Device family</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="deviceFamily">Arria 10</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>deviceSpeedGrade</spirit:name>
+          <spirit:displayName>Device Speed Grade</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="deviceSpeedGrade">2</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>generationId</spirit:name>
+          <spirit:displayName>Generation Id</spirit:displayName>
+          <spirit:value spirit:format="long" spirit:id="generationId">0</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>bonusData</spirit:name>
+          <spirit:displayName>bonusData</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="bonusData">bonusData 
+{
+   element fpdsp_block_0
+   {
+      datum _sortIndex
+      {
+         value = "0";
+         type = "int";
+      }
+   }
+}
+</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>hideFromIPCatalog</spirit:name>
+          <spirit:displayName>Hide from IP Catalog</spirit:displayName>
+          <spirit:value spirit:format="bool" spirit:id="hideFromIPCatalog">true</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>lockedInterfaceDefinition</spirit:name>
+          <spirit:displayName>lockedInterfaceDefinition</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="lockedInterfaceDefinition"></spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>systemInfos</spirit:name>
+          <spirit:displayName>systemInfos</spirit:displayName>
+          <spirit:value spirit:format="string" spirit:id="systemInfos"><![CDATA[<systemInfosDefinition>
+    <connPtSystemInfos/>
+</systemInfosDefinition>]]></spirit:value>
+        </spirit:parameter>
+      </spirit:parameters>
+    </altera:altera_system_parameters>
+    <altera:altera_interface_boundary>
+      <altera:interface_mapping altera:name="accumulate" altera:internal="fpdsp_block_0.accumulate"></altera:interface_mapping>
+      <altera:interface_mapping altera:name="aclr" altera:internal="fpdsp_block_0.aclr" altera:type="conduit" altera:dir="end">
+        <altera:port_mapping altera:name="aclr" altera:internal="aclr"></altera:port_mapping>
+      </altera:interface_mapping>
+      <altera:interface_mapping altera:name="ax" altera:internal="fpdsp_block_0.ax"></altera:interface_mapping>
+      <altera:interface_mapping altera:name="ay" altera:internal="fpdsp_block_0.ay" altera:type="conduit" altera:dir="end">
+        <altera:port_mapping altera:name="ay" altera:internal="ay"></altera:port_mapping>
+      </altera:interface_mapping>
+      <altera:interface_mapping altera:name="az" altera:internal="fpdsp_block_0.az" altera:type="conduit" altera:dir="end">
+        <altera:port_mapping altera:name="az" altera:internal="az"></altera:port_mapping>
+      </altera:interface_mapping>
+      <altera:interface_mapping altera:name="chainout" altera:internal="fpdsp_block_0.chainout"></altera:interface_mapping>
+      <altera:interface_mapping altera:name="clk" altera:internal="fpdsp_block_0.clk" altera:type="conduit" altera:dir="end">
+        <altera:port_mapping altera:name="clk" altera:internal="clk"></altera:port_mapping>
+      </altera:interface_mapping>
+      <altera:interface_mapping altera:name="ena" altera:internal="fpdsp_block_0.ena" altera:type="conduit" altera:dir="end">
+        <altera:port_mapping altera:name="ena" altera:internal="ena"></altera:port_mapping>
+      </altera:interface_mapping>
+      <altera:interface_mapping altera:name="result" altera:internal="fpdsp_block_0.result" altera:type="conduit" altera:dir="end">
+        <altera:port_mapping altera:name="result" altera:internal="result"></altera:port_mapping>
+      </altera:interface_mapping>
+    </altera:altera_interface_boundary>
+    <altera:altera_has_warnings>false</altera:altera_has_warnings>
+    <altera:altera_has_errors>false</altera:altera_has_errors>
+  </spirit:vendorExtensions>
+</spirit:component>

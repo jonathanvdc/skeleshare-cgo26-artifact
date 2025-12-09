@@ -1,0 +1,7 @@
+/home/thjuang/syntest/sw/CMakeFiles/install/strip.dir
+/home/thjuang/syntest/sw/CMakeFiles/install/local.dir
+/home/thjuang/syntest/sw/CMakeFiles/install.dir
+/home/thjuang/syntest/sw/CMakeFiles/list_install_components.dir
+/home/thjuang/syntest/sw/CMakeFiles/rebuild_cache.dir
+/home/thjuang/syntest/sw/CMakeFiles/edit_cache.dir
+/home/thjuang/syntest/sw/CMakeFiles/hello_afu.dir

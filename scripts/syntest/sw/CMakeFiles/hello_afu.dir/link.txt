@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/hello_afu.dir/opae_svc_wrapper.cpp.o CMakeFiles/hello_afu.dir/hello_afu.cpp.o  -o hello_afu  -L/usr/local/lib -Wl,-rpath,/usr/local/lib -luuid -lMPF -lhugetlbfs -lopae-c-ase 
