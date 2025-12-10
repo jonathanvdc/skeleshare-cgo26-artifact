@@ -34,6 +34,9 @@ Available experiments are as follows. Note that `13-vgg-baseline-no-sharing` is 
 - `6-self-attention`
 - `8-stencil-4stage`
 - `9-stencil-baseline`
+- `10-vgg-no-sharing`
+- `11-vgg-no-padding`
+- `12-vgg-no-tiling`
 - `13-vgg-baseline-no-sharing`
 - `14-vgg-skeleshare-1abstr`
 - `15-vgg-quarter-dsps`
@@ -42,7 +45,7 @@ Available experiments are as follows. Note that `13-vgg-baseline-no-sharing` is 
 The structore of ``scripts/syntest`` is as follows. The foler contains the hardware wrappers for handling the FPGA's interface, as well as a software runtime to control the device.
 After synthesis, there will be a generated ``build`` folder that contains FPGA bitstream and source usage numbers.
 ```
-syntest-CGO26-ARTIFACT
+syntest
 ├── hw                  # Hardware wrapper for synthesis
 ├── sw                  # Software runtime
 ├── real.sh             # Script for running synthesis
@@ -53,7 +56,7 @@ syntest-CGO26-ARTIFACT
 `scripts/profile` is a sample environment setup for Intel FPGA tool chain. Note that the setup will be different if users use their own software tools (due to different installation paths and software verions.)
 
 
-## Step-By-Step Instructions
+## Step-By-Step Instructions (Table III)
 
 The steps below walk you through the complete workflow for evaluating SkeleShare using our Docker image and server setup.
 You'll connect to the server, pull the artifact's Docker container, generate VHDL for all experiments, and run the pre-synthesized designs on the provided Arria-10 FPGA.
@@ -99,6 +102,17 @@ The VHDL code for each experiment is stored in:
 ./results/<experiment-id>/lowering/
 ```
 
+After running the container, the following folder will be created as well and contain the required hardware wrapper and environment setup files to run synthesis.
+```
+./results/scripts
+```
+
+Before moving to the next step, please running the following command to ensure the script files are reachable. The command ``echo $SCRIPTDIR`` should include the absolute path to the ``scripts`` folder
+```
+export SCRIPTDIR=$(pwd)/results/scripts
+echo $SCRIPTDIR
+```
+
 ### 4. Running Synthesized Designs
 
 Since synthesis typically takes between **4 to 8 hours** for each benchmark in the paper, we provide pre-synthesized designs that correspond exactly to the generated VHDL files for each experiment.
@@ -110,7 +124,7 @@ These can be found under:
 To directly execute an experiment's pre-synthesized hardware design on the FPGA board, navigate to the experiment's directory and run the following commands:
 
 ```bash
-source /mnt/sdc1/examples/profile
+source $SCRIPTDIR/profile
 ./real_start.sh
 ./real_sw.sh
 ```
@@ -118,7 +132,7 @@ source /mnt/sdc1/examples/profile
 Finally, run the following script to summarize logic, RAM usage, DSP usage, and GOPS measurements taken in the previous step.
 
 ```bash
-bash /mnt/sdc1/examples/scripts/<experiment-id>.sh
+bash $SCRIPTDIR/scores/<experiment-id>.sh
 ```
 
 The output adheres to the following format, which can be cross-referenced with Table III from the paper.
@@ -132,7 +146,7 @@ GOP/s : 169.936
 
 ---
 
-## Additional Options
+## Additional Options (Table III)
 
 The commands above reproduce the default artifact workflow, but the evaluation harness also supports several optional paths.
 These include re-running equality saturation from scratch, re-synthesizing hardware designs with Quartus, or executing only a selected subset of experiments.
@@ -150,6 +164,8 @@ docker run --rm -it \
   python3 evaluation.py --phase eqsat
 ```
 
+Note that running all the experiments may take at least 18 hours.
+
 ### Re-Running Synthesis
 
 The server stores pre-synthesized designs corresponding to the generated VHDL files for each experiment.
@@ -157,8 +173,8 @@ To re-synthesize these designs for an experiment after Step 3, use Quartus.
 For each experiment, navigate to the `results/lowering` folder of the desired experiment and run:
 
 ```bash
-source /mnt/sdc1/examples/profile
-cp -r /mnt/sdc1/examples/syntest/* .
+source $SCRIPTDIR/profile
+cp -r $SCRIPTDIR/syntest/* .
 mkdir hw/rtl/generated
 mv *.vhd *.dat hw/rtl/generated/
 ```
@@ -198,3 +214,8 @@ These experiment IDs are:
 - `14-vgg-skeleshare-1abstr`
 - `15-vgg-quarter-dsps`
 - `17-vgg-half-dsps`
+
+Note experiments `10-vgg-no-sharing`, `11-vgg-no-padding`, and `12-vgg-no-tiling` will trigger erros during the equality saturation stage. Therefore, there is no lowering stage for them. 
+`13-vgg-baseline-no-sharing` does not contain the equality saturation stage and the synthesis step will fail during to resource limitation.
+The ``stencil`` experiments usaully need 2-3 hours. 
+The ``vgg``, ``tinyyolo``, ``self-attention`` tests may take 7-12 hours.
