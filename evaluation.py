@@ -77,7 +77,7 @@ def fqcn_from_test_path(path: str) -> str:
 
 def shir_repo_dir(branch: str) -> str:
     # Dockerfile clones into /workspace/shir-<branch>
-    return os.path.join(WORKSPACE_DIR, f"shir-{branch}")
+    return os.path.join(WORKSPACE_DIR, f"shir-{branch}") 
 
 
 def snapshot_files(root: str) -> Set[str]:
@@ -358,6 +358,15 @@ def main() -> None:
     os.makedirs(RESULTS_DIR, exist_ok=True)
 
     print(f"Results will be stored under: {RESULTS_DIR}")
+
+    s = os.path.join(WORKSPACE_DIR, 'scripts')
+    d = os.path.join(RESULTS_DIR, 'scripts')
+    if os.path.isdir(s):
+        shutil.copytree(s, d)
+    else:
+        shutil.copy2(s, d)
+
+    print(f"Copied script files to {RESULTS_DIR}")
 
     for exp in experiments:
         if args.phase in ("eqsat", "both") and exp.eqsat is not None:
