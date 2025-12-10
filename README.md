@@ -13,6 +13,46 @@ SkeleShare is a fully automated system for resource allocation and hardware shar
 The Docker image in this artifact reproduces the paper's main results, which are found in Table III.
 VHDL code for all experiments can be generated using a single command inside the container, and results are written to the local `results/` directory for inspection and further processing.
 
+## Folder Structure
+```
+SKELESHARE-CGO26-ARTIFACT
+├── scripts             # Scripts for reproducing results
+│   ├── figures         # Tex scripts for producing figure 12
+│   ├── scores          # Scripts for Table III's numbers
+│   ├── syntest         # Wraper for synthesis
+│   └── profile         # Sample enviroment setup for FPGA
+├── Dockerfile          
+├── evaluation.py       # Main script for running experiments
+└── README.md           # Documentation
+```
+
+``scripts/scores`` prints out performance numbers such as Logic, RAM, DSP, and GOP/s after synthesis. Users will need to synthesize the generated design with ``scripts/syntest`` and run the FPGA bitstream before collecting performance numbers.
+
+Available experiments are as follows. Note that `13-vgg-baseline-no-sharing` is not synthesizable so the experiment will trigger an error and produce no performance number.
+- `1-vgg`
+- `3-tinyyolo`
+- `6-self-attention`
+- `8-stencil-4stage`
+- `9-stencil-baseline`
+- `13-vgg-baseline-no-sharing`
+- `14-vgg-skeleshare-1abstr`
+- `15-vgg-quarter-dsps`
+- `17-vgg-half-dsps`
+
+The structore of ``scripts/syntest`` is as follows. The foler contains the hardware wrappers for handling the FPGA's interface, as well as a software runtime to control the device.
+After synthesis, there will be a generated ``build`` folder that contains FPGA bitstream and source usage numbers.
+```
+syntest-CGO26-ARTIFACT
+├── hw                  # Hardware wrapper for synthesis
+├── sw                  # Software runtime
+├── real.sh             # Script for running synthesis
+├── real_sw.sh          # Script for running program on FPGA
+└── real_start.sh       # Script for loading bitstream to FPGA
+```
+
+`scripts/profile` is a sample environment setup for Intel FPGA tool chain. Note that the setup will be different if users use their own software tools (due to different installation paths and software verions.)
+
+
 ## Step-By-Step Instructions
 
 The steps below walk you through the complete workflow for evaluating SkeleShare using our Docker image and server setup.
