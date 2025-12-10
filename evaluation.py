@@ -323,6 +323,38 @@ EXPERIMENTS: List[Experiment] = [
             path="src/test/algo/vgg8bits/VggConvHalfDSPTest.scala",
         ),
     ),
+    Experiment(
+        id="A-vgg-enodes",
+        description="A. VGG ENodes",
+        eqsat=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/VGGEnodesTest.scala",
+        ),
+    ),
+    Experiment(
+        id="B1-vgg-saturation",
+        description="B1. VGG Saturation",
+        eqsat=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/VGGSaturationTest.scala",
+        ),
+    ),
+    Experiment(
+        id="B2-vgg-outlining",
+        description="B2. VGG Outlining",
+        eqsat=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/VGGOutliningTest.scala",
+        ),
+    ),
+    Experiment(
+        id="B2e-vgg-outlining-early",
+        description="B2e. VGG Outlining",
+        eqsat=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/VGGOutliningEarlyTest.scala",
+        ),
+    ),
 ]
 
 
