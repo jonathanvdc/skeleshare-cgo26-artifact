@@ -330,6 +330,7 @@ EXPERIMENTS: List[Experiment] = [
             branch="new-test-tag",
             path="src/test/eqsat/nn/VGGEnodesTest.scala",
         ),
+        lowering=None,
     ),
     Experiment(
         id="B1-vgg-saturation",
@@ -338,6 +339,7 @@ EXPERIMENTS: List[Experiment] = [
             branch="new-test-tag",
             path="src/test/eqsat/nn/VGGSaturationTest.scala",
         ),
+        lowering=None,
     ),
     Experiment(
         id="B2-vgg-outlining",
@@ -346,6 +348,7 @@ EXPERIMENTS: List[Experiment] = [
             branch="new-test-tag",
             path="src/test/eqsat/nn/VGGOutliningTest.scala",
         ),
+        lowering=None,
     ),
     Experiment(
         id="B2e-vgg-outlining-early",
@@ -354,6 +357,7 @@ EXPERIMENTS: List[Experiment] = [
             branch="new-test-tag",
             path="src/test/eqsat/nn/VGGOutliningEarlyTest.scala",
         ),
+        lowering=None,
     ),
 ]
 
