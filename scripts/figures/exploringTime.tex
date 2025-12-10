@@ -1,0 +1,58 @@
+\documentclass[tikz,border=2mm]{standalone} 
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{xcolor}  % make sure xcolor is loaded
+
+\definecolor{linkblue}{rgb}{0.21, 0.41, 0.62}
+\definecolor{linkviolet}{rgb}{0.41, 0.21, 0.52}
+
+
+\begin{document}
+
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel={\footnotesize Layers},
+        ylabel={\footnotesize Time (minutes)},
+        %grid=major,
+        ymin=0, ymax=200,
+        xtick={1,3,5,7,9,11,13,15},
+        ytick={0,60,120,180},
+        width=0.5\textwidth,
+        height=3.5cm,
+        legend style={at={(0.98,0.5)},anchor=east,legend columns=1,nodes={scale=0.65, transform shape}},
+        legend cell align={left}
+        ]
+        \addplot[
+        dashed,
+        thick,
+        color=black
+        ] coordinates {
+        (1,180) (15,180)
+        };
+        \addlegendentry{Time limit}
+        
+        \addplot[
+        color=linkblue,
+        mark=diamond*,
+        thick
+        ] table [
+		x expr=\coordindex + 1,   % start index at 1
+		y index=0
+	] {saturation.csv};
+        \addlegendentry{Saturation}
+        
+        \addplot[
+        color=red!80!black,
+        mark=triangle*,
+        thick
+        ] table [
+		x expr=\coordindex + 1,   % start index at 1
+		y index=0
+	] {outlining.csv};
+        \addlegendentry{Extraction}
+    \end{axis}
+\end{tikzpicture}%
+
+\end{document}

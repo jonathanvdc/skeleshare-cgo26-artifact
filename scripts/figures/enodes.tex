@@ -1,0 +1,34 @@
+\documentclass[tikz,border=2mm]{standalone} 
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{xcolor}  % make sure xcolor is loaded
+
+\definecolor{linkblue}{rgb}{0.21, 0.41, 0.62}
+\definecolor{linkviolet}{rgb}{0.41, 0.21, 0.52}
+
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={\footnotesize Layers},
+    ylabel={\footnotesize \# of e-nodes},
+    %grid=major,
+    ymin=0, ymax=1300,
+    xtick={1,3,5,7,9,11,13,15},
+    ytick distance=250,
+    width=0.5\textwidth,
+    height=3.5cm
+    ]
+    \addplot[
+    color=linkblue,
+    mark=diamond*,
+    thick
+    ] table [
+		x expr=\coordindex + 1,   % start index at 1
+		y index=0
+	] {enodes.csv};
+\end{axis}
+\end{tikzpicture}%
+\end{document}
