@@ -54,6 +54,7 @@ class Experiment:
     description: str
     eqsat: Optional[PhaseConfig]
     lowering: Optional[PhaseConfig]
+    figure: Optional[PhaseConfig]
 
 
 def fqcn_from_test_path(path: str) -> str:
@@ -202,6 +203,7 @@ EXPERIMENTS: List[Experiment] = [
             branch="new-test-tag",
             path="src/test/algo/vgg8bits/VggFullBiasTest.scala",
         ),
+        figure=None,
     ),
     Experiment(
         id="3-tinyyolo",
@@ -214,6 +216,7 @@ EXPERIMENTS: List[Experiment] = [
             branch="new-test-tag-y",
             path="src/test/backend/hdl/arch/yolo/ShallowConvFullTest.scala",
         ),
+        figure=None,
     ),
     Experiment(
         id="6-self-attention",
@@ -226,6 +229,7 @@ EXPERIMENTS: List[Experiment] = [
             branch="eqsat-nn-extra-sync",
             path="src/test/eqsat/nnExtra/SelfAttentionLoweringTest.scala",
         ),
+        figure=None,
     ),
     Experiment(
         id="8-stencil-4stage",
@@ -238,6 +242,7 @@ EXPERIMENTS: List[Experiment] = [
             branch="eqsat-nn-extra-sync",
             path="src/test/eqsat/nnExtra/StencilLoweringTest.scala",
         ),
+        figure=None,
     ),
     Experiment(
         id="9-stencil-baseline",
@@ -247,6 +252,7 @@ EXPERIMENTS: List[Experiment] = [
             branch="eqsat-nn-extra-sync",
             path="src/test/eqsat/nnExtra/StencilNoSharingTest.scala",
         ),
+        figure=None,
     ),
     Experiment(
         id="10-vgg-no-sharing",
@@ -257,6 +263,7 @@ EXPERIMENTS: List[Experiment] = [
             expect_failure=True,
         ),
         lowering=None,
+        figure=None,
     ),
     Experiment(
         id="11-vgg-no-padding",
@@ -267,6 +274,7 @@ EXPERIMENTS: List[Experiment] = [
             expect_failure=True,
         ),
         lowering=None,
+        figure=None,
     ),
     Experiment(
         id="12-vgg-no-tiling",
@@ -277,6 +285,7 @@ EXPERIMENTS: List[Experiment] = [
             expect_failure=True,
         ),
         lowering=None,
+        figure=None,
     ),
     Experiment(
         id="13-vgg-baseline-no-sharing",
@@ -286,6 +295,7 @@ EXPERIMENTS: List[Experiment] = [
             branch="eqsat-nn-extra-sync",
             path="src/test/eqsat/nnExtra/VGGLoweringTest.scala",
         ),
+        figure=None,
     ),
     Experiment(
         id="14-vgg-skeleshare-1abstr",
@@ -298,6 +308,7 @@ EXPERIMENTS: List[Experiment] = [
             branch="new-test-tag",
             path="src/test/eqsat/nn/VggConvHalfAbsTest.scala",
         ),
+        figure=None,
     ),
     Experiment(
         id="15-vgg-quarter-dsps",
@@ -310,6 +321,7 @@ EXPERIMENTS: List[Experiment] = [
             branch="new-test-tag",
             path="src/test/algo/vgg8bits/VggConvFourthDSPTest.scala",
         ),
+        figure=None,
     ),
     Experiment(
         id="17-vgg-half-dsps",
@@ -322,42 +334,37 @@ EXPERIMENTS: List[Experiment] = [
             branch="new-test-tag",
             path="src/test/algo/vgg8bits/VggConvHalfDSPTest.scala",
         ),
+        figure=None,
     ),
     Experiment(
         id="A-vgg-enodes",
         description="A. VGG ENodes",
-        eqsat=PhaseConfig(
+        eqsat=None,
+        lowering=None,
+        figure=PhaseConfig(
             branch="new-test-tag",
             path="src/test/eqsat/nn/VGGEnodesTest.scala",
         ),
-        lowering=None,
     ),
     Experiment(
-        id="B1-vgg-saturation",
-        description="B1. VGG Saturation",
-        eqsat=PhaseConfig(
-            branch="new-test-tag",
-            path="src/test/eqsat/nn/VGGSaturationTest.scala",
-        ),
+        id="B-vgg-outlining",
+        description="B. VGG Outlining",
+        eqsat=None,
         lowering=None,
-    ),
-    Experiment(
-        id="B2-vgg-outlining",
-        description="B2. VGG Outlining",
-        eqsat=PhaseConfig(
+        figure=PhaseConfig(
             branch="new-test-tag",
             path="src/test/eqsat/nn/VGGOutliningTest.scala",
         ),
-        lowering=None,
     ),
     Experiment(
-        id="B2e-vgg-outlining-early",
-        description="B2e. VGG Outlining",
-        eqsat=PhaseConfig(
+        id="B-vgg-outlining-early",
+        description="B. VGG Outlining Early",
+        eqsat=None,
+        lowering=None,
+        figure=PhaseConfig(
             branch="new-test-tag",
             path="src/test/eqsat/nn/VGGOutliningEarlyTest.scala",
         ),
-        lowering=None,
     ),
 ]
 
@@ -372,7 +379,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--phase",
-        choices=["eqsat", "lowering", "both"],
+        choices=["eqsat", "lowering", "both", "figure"],
         default="lowering",
         help="The phases to run for each experiment.",
     )

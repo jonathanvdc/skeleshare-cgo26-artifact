@@ -164,7 +164,14 @@ docker run --rm -it \
   python3 evaluation.py --phase eqsat
 ```
 
-Note that running all the experiments may take at least 18 hours.
+```bash
+docker run --rm -it \
+  --mount type=bind,src=./results,dst=/workspace/results \
+  ghcr.io/jonathanvdc/skeleshare-cgo26-artifact:latest \
+  python3 evaluation.py --phase lowering
+```
+
+Note that running all the experiments may take at least 15 hours.
 
 ### Re-Running Synthesis
 
@@ -191,6 +198,43 @@ Synthesis typically takes 4 to 8 hours to complete. After it finishes, you can r
 ./real_sw.sh
 ```
 
+## Step-By-Step Instructions (Figure 12)
+
+To repdouce, figure 12 (a), please run the following commands to get the data points for enode numbers:
+
+```bash
+docker run --rm -it \
+  --mount type=bind,src=./results,dst=/workspace/results \
+  ghcr.io/jonathanvdc/skeleshare-cgo26-artifact:latest \
+  python3 evaluation.py --phase figure --only A-vgg-enodes
+```
+
+To draw the figure, navigate to the `results/figure/A-vgg-enodes` folder of the desired experiment and run:
+
+```bash
+cp $SCRIPTDIR/figures/enodes.tex
+pdflatex enodes.tex
+```
+
+To repdouce, figure 12 (b), there are 2 options: ``B-vgg-outlining`` and ``B-vgg-outlining-early``.
+``B-vgg-outlining`` will produce all the data point in  figure 12 (b) but it can take several days. 
+Therefore we provides ``B-vgg-outlining-early`` that only produces data points from 1 to 7 for the extraction cruve.
+After data point 7, the later run time data will be clipped by 180 minutes. 
+So there is no point to run all the data point after that at a time.
+
+```bash
+docker run --rm -it \
+  --mount type=bind,src=./results,dst=/workspace/results \
+  ghcr.io/jonathanvdc/skeleshare-cgo26-artifact:latest \
+  python3 evaluation.py --phase figure --only B-vgg-outlining-early
+```
+
+To draw the figure, navigate to the `results/figure/B-vgg-outlining-early` folder of the desired experiment and run:
+```bash
+cp $SCRIPTDIR/figures/exploringTime.tex
+pdflatex exploringTime.tex
+```
+
 ### Running only selected experiments
 
 You may restrict execution to a comma‑separated list of experiment IDs, e.g.:
@@ -214,6 +258,9 @@ These experiment IDs are:
 - `14-vgg-skeleshare-1abstr`
 - `15-vgg-quarter-dsps`
 - `17-vgg-half-dsps`
+- `A-vgg-enodes`
+- `B-vgg-outlining`
+- `B-vgg-outlining-early`
 
 Note experiments `10-vgg-no-sharing`, `11-vgg-no-padding`, and `12-vgg-no-tiling` will trigger erros during the equality saturation stage. Therefore, there is no lowering stage for them. 
 `13-vgg-baseline-no-sharing` does not contain the equality saturation stage and the synthesis step will fail during to resource limitation.
