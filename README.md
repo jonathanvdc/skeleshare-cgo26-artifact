@@ -129,6 +129,8 @@ source $SCRIPTDIR/profile
 ./real_sw.sh
 ```
 
+### 5. Results
+
 Finally, run the following script to summarize logic, RAM usage, DSP usage, and GOPS measurements taken in the previous step.
 
 ```bash
