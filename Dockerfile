@@ -66,7 +66,8 @@ COPY . /workspace
 
 # Set up permission
 RUN chmod 1777 /workspace
-RUN chmod 1777 /tmp
+RUN mkdir -p /workspace/.cache
+ENV SBT_HOME=$HOME/.cache/sbt
 
 # Default command: run all eqsat and lowering.
 # Results are written to /workspace/results.
