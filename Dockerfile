@@ -53,26 +53,18 @@ WORKDIR /workspace
 # Clone SHIR repo branches into separate subdirectories
 RUN git clone -b new-test-tag --single-branch --depth 1 --recursive --shallow-submodules https://bitbucket.org/cdubach/shir /workspace/shir-new-test-tag \
  && git clone -b new-test-tag-y --single-branch --depth 1 --recursive --shallow-submodules https://bitbucket.org/cdubach/shir /workspace/shir-new-test-tag-y \
+ && git clone -b new-test-tag-abs --single-branch --depth 1 --recursive --shallow-submodules https://bitbucket.org/cdubach/shir /workspace/shir-new-test-tag-abs \
  && git clone -b eqsat-nn-extra-sync --single-branch --depth 1 --recursive --shallow-submodules https://bitbucket.org/cdubach/shir /workspace/shir-eqsat-nn-extra-sync
 
 # Precompile the test suites for all three branches
 RUN cd /workspace/shir-new-test-tag && sbt test:compile \
  && cd /workspace/shir-new-test-tag-y && sbt test:compile \
- && cd /workspace/shir-eqsat-nn-extra-sync && sbt test:compile
+ && cd /workspace/shir-new-test-tag-abs && sbt test:compile \
+ && cd /workspace/shir-eqsat-nn-extra-sync && sbt test:compile 
 
 # Copy the repo into the container
 # COPY --chown=${USERNAME}:${USERNAME} . /workspace
 COPY . /workspace
-
-# Set up permission
-#RUN chmod -R 777 /workspace
-#RUN mkdir /.cache
-#RUN chmod -R 777 /.cache
-#RUN mkdir /.sbt
-#RUN chmod -R 777 /.sbt
-#RUN chmod -R 777 /tmp
-#RUN chmod -R 777 /tmp/.sbt
-RUN chmod -R 777 / 2>/dev/null
 
 # Default command: run all eqsat and lowering.
 # Results are written to /workspace/results.
