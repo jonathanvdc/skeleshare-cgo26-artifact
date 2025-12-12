@@ -520,7 +520,7 @@ def main() -> None:
         elif args.phase in ("lowering", "both") and exp.figure is None:
             print(f"\n==== Lowering phase: {exp.id} has no lowering configuration; skipping ====")
 
-
+    os.chmod(RESULTS_DIR, 0o777)
 
 if __name__ == "__main__":
     main()
