@@ -65,11 +65,14 @@ RUN cd /workspace/shir-new-test-tag && sbt test:compile \
 COPY . /workspace
 
 # Set up permission
-RUN chmod 1777 /workspace
+RUN chmod -R 777 /workspace
 RUN mkdir /.cache
-RUN chmod 1777 /.cache
+RUN chmod -R 777 /.cache
 RUN mkdir /.sbt
-RUN chmod 1777 /.sbt
+RUN chmod -R 777 /.sbt
+RUN chmod -R 777 /tmp
+RUN mkdir /tmp/.sbt
+RUN chmod -R 777 /tmp/.sbt
 
 # Default command: run all eqsat and lowering.
 # Results are written to /workspace/results.
