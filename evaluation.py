@@ -104,7 +104,6 @@ def copy_relative_paths(src_root: str, rel_paths: Set[str], dst_root: str) -> No
         dst = os.path.join(dst_root, rel)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         shutil.copy2(src, dst)
-    os.chmod(dst, 0o777)
 
 
 def run_sbt_test(repo_dir: str, test_path: str, expect_failure: bool = False) -> None:
@@ -190,7 +189,15 @@ def run_lowering_phase(exp: Experiment, cfg: PhaseConfig) -> None:
             shutil.copytree(s, d)
         else:
             shutil.copy2(s, d)
-    os.chmod(dest, 0o777)
+
+
+def recursive_chmod(path, mode):
+    for root, dirs, files in os.walk(path):
+        for d in dirs:
+            os.chmod(os.path.join(root, d), mode)
+        for f in files:
+            os.chmod(os.path.join(root, f), mode)
+    os.chmod(path, mode)
 
 
 EXPERIMENTS: List[Experiment] = [
@@ -520,7 +527,7 @@ def main() -> None:
         elif args.phase in ("lowering", "both") and exp.figure is None:
             print(f"\n==== Lowering phase: {exp.id} has no lowering configuration; skipping ====")
 
-    os.chmod(RESULTS_DIR, 0o777)
+    recursive_chmod(RESULTS_DIR, 0o777)
 
 if __name__ == "__main__":
     main()
