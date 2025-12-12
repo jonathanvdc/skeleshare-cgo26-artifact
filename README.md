@@ -202,6 +202,8 @@ To generate the figure, navigate to the experiment’s `results/A-vgg-enodes/eqs
 pdflatex $SCRIPTDIR/figures/enodes.tex
 ```
 
+The command will generate ``enodes.pdf`` which represents Figure 12(a). If users' host terminal support X11 forwarding, they can access the pdf with ``xdg-open ./enodes.pdf``. Otherwise, users have to use ``scp`` to move the figure to their host.
+
 To reproduce Figure 12(b), the artifact provides the following experiment options:
 - `B-vgg-saturation`
 - `B-vgg-extraction-1to5`
@@ -227,10 +229,11 @@ To generate the plot, go to the experiment’s `results/` directory and run:
 
 ```bash
 cp B-vgg-saturation/eqsat/saturation.csv ./
-cp $SCRIPTDIR/figures/exploringTime.tex ./
 bash $SCRIPTDIR/figures/concatExtraction.sh
-pdflatex exploringTime.tex
+pdflatex $SCRIPTDIR/figures/exploringTime.tex
 ```
+
+The command will generate ``exploringTime.pdf`` which represents Figure 12(b). If users' host terminal support X11 forwarding, they can access the pdf with ``xdg-open ./exploringTime.pdf``. Otherwise, users have to use ``scp`` to move the figure to their host.
 
 ## Running Selected Experiments
 
