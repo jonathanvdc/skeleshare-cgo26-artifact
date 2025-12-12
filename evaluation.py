@@ -347,23 +347,113 @@ EXPERIMENTS: List[Experiment] = [
         ),
     ),
     Experiment(
-        id="B-vgg-outlining",
-        description="B. VGG Outlining",
+        id="B-vgg-saturation",
+        description="B. VGG Saturation",
         eqsat=None,
         lowering=None,
         figure=PhaseConfig(
             branch="new-test-tag",
-            path="src/test/eqsat/nn/VGGOutliningTest.scala",
+            path="src/test/eqsat/nn/VGGSaturationTest.scala",
         ),
     ),
     Experiment(
-        id="B-vgg-outlining-early",
-        description="B. VGG Outlining Early",
+        id="B-vgg-extraction-1to5",
+        description="B. VGG Extration 1to5",
         eqsat=None,
         lowering=None,
         figure=PhaseConfig(
             branch="new-test-tag",
-            path="src/test/eqsat/nn/VGGOutliningEarlyTest.scala",
+            path="src/test/eqsat/nn/extraction/data1to5.scala",
+        ),
+    ),
+    Experiment(
+        id="B-vgg-extraction-6",
+        description="B. VGG Extration 6",
+        eqsat=None,
+        lowering=None,
+        figure=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/extraction/data6.scala",
+        ),
+    ),
+    Experiment(
+        id="B-vgg-extraction-7",
+        description="B. VGG Extration 7",
+        eqsat=None,
+        lowering=None,
+        figure=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/extraction/data7.scala",
+        ),
+    ),
+    Experiment(
+        id="B-vgg-extraction-8",
+        description="B. VGG Extration 8",
+        eqsat=None,
+        lowering=None,
+        figure=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/extraction/data8.scala",
+        ),
+    ),
+    Experiment(
+        id="B-vgg-extraction-9",
+        description="B. VGG Extration 9",
+        eqsat=None,
+        lowering=None,
+        figure=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/extraction/data9.scala",
+        ),
+    ),
+    Experiment(
+        id="B-vgg-extraction-10",
+        description="B. VGG Extration 10",
+        eqsat=None,
+        lowering=None,
+        figure=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/extraction/data10.scala",
+        ),
+    ),
+    Experiment(
+        id="B-vgg-extraction-11",
+        description="B. VGG Extration 11",
+        eqsat=None,
+        lowering=None,
+        figure=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/extraction/data11.scala",
+        ),
+    ),
+    Experiment(
+        id="B-vgg-extraction-12",
+        description="B. VGG Extration 12",
+        eqsat=None,
+        lowering=None,
+        figure=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/extraction/data12.scala",
+        ),
+    ),
+    Experiment(
+        id="B-vgg-extraction-13",
+        description="B. VGG Extration 13",
+        eqsat=None,
+        lowering=None,
+        figure=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/extraction/data13.scala",
+        ),
+    ),
+    Experiment(
+        id="B-vgg-extraction-14",
+        description="B. VGG Extration 14",
+        eqsat=None,
+        lowering=None,
+        figure=PhaseConfig(
+            branch="new-test-tag",
+            path="src/test/eqsat/nn/extraction/data14.scala",
         ),
     ),
 ]

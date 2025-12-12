@@ -1,0 +1,1 @@
+cat extraction1to5.csv extraction6.csv extraction7.csv extraction8.csv extraction9.csv extraction10.csv extraction11.csv extraction12.csv extraction13.csv extraction14.csv 2>/dev/null > extraction.csv

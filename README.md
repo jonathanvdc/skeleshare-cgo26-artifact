@@ -28,20 +28,6 @@ SKELESHARE-CGO26-ARTIFACT
 
 ``scripts/scores`` prints out performance numbers such as Logic, RAM, DSP, and GOP/s after synthesis. Users will need to synthesize the generated design with ``scripts/syntest`` and run the FPGA bitstream before collecting performance numbers.
 
-Available experiments are as follows. Note that `13-vgg-baseline-no-sharing` is not synthesizable so the experiment will trigger an error and produce no performance number.
-- `1-vgg`
-- `3-tinyyolo`
-- `6-self-attention`
-- `8-stencil-4stage`
-- `9-stencil-baseline`
-- `10-vgg-no-sharing`
-- `11-vgg-no-padding`
-- `12-vgg-no-tiling`
-- `13-vgg-baseline-no-sharing`
-- `14-vgg-skeleshare-1abstr`
-- `15-vgg-quarter-dsps`
-- `17-vgg-half-dsps`
-
 The structore of ``scripts/syntest`` is as follows. The foler contains the hardware wrappers for handling the FPGA's interface, as well as a software runtime to control the device.
 After synthesis, there will be a generated ``build`` folder that contains FPGA bitstream and source usage numbers.
 ```
@@ -214,26 +200,32 @@ docker run --rm -it \
 To draw the figure, navigate to the `results/figure/A-vgg-enodes` folder of the desired experiment and run:
 
 ```bash
-cp $SCRIPTDIR/figures/enodes.tex
+cp $SCRIPTDIR/figures/enodes.tex ./
 pdflatex enodes.tex
 ```
 
-To repdouce, figure 12 (b), there are 2 options: ``B-vgg-outlining`` and ``B-vgg-outlining-early``.
-``B-vgg-outlining`` will produce all the data point in  figure 12 (b) but it can take several days. 
-Therefore we provides ``B-vgg-outlining-early`` that only produces data points from 1 to 7 for the extraction cruve.
-After data point 7, the later run time data will be clipped by 180 minutes. 
-So there is no point to run all the data point after that at a time.
+To repdouce figure 12 (b), there are following options:
+- `B-vgg-saturation`
+- `B-vgg-extraction-1to5`
+- `B-vgg-extraction-$id` ($id = 6 ~ 14)
+
+Since running the whole experiment will take several days, we partition the experiment into several move steps.
+`B-vgg-saturation` produces the saturation curve in figure 12 (b). 
+`B-vgg-extraction-1to5`, `B-vgg-extraction-6`, ..., and `B-vgg-extraction-14` produce the extraction curve in figure 12 (b). 
+Note that `B-vgg-extraction-7` to `B-vgg-extraction-14` will reach the run time cut-off and therefore produce similar run time (180 minutes).
 
 ```bash
 docker run --rm -it \
   --mount type=bind,src=./results,dst=/workspace/results \
   ghcr.io/jonathanvdc/skeleshare-cgo26-artifact:latest \
-  python3 evaluation.py --phase figure --only B-vgg-outlining-early
+  python3 evaluation.py --phase figure --only B-vgg-saturation
 ```
 
-To draw the figure, navigate to the `results/figure/B-vgg-outlining-early` folder of the desired experiment and run:
+To draw the figure, navigate to the `results/figure/` folder of the desired experiment and run:
 ```bash
-cp $SCRIPTDIR/figures/exploringTime.tex
+cp B-vgg-saturation/saturation.csv ./
+cp $SCRIPTDIR/figures/exploringTime.tex ./
+bash $SCRIPTDIR/figures/concatExtraction.sh
 pdflatex exploringTime.tex
 ```
 
@@ -261,10 +253,12 @@ These experiment IDs are:
 - `15-vgg-quarter-dsps`
 - `17-vgg-half-dsps`
 - `A-vgg-enodes`
-- `B-vgg-outlining`
-- `B-vgg-outlining-early`
+- `B-vgg-saturation`
+- `B-vgg-extraction-1to5`
+- `B-vgg-extraction-$id` ($id = 6 ~ 14)
 
 Note experiments `10-vgg-no-sharing`, `11-vgg-no-padding`, and `12-vgg-no-tiling` will trigger erros during the equality saturation stage. Therefore, there is no lowering stage for them. 
 `13-vgg-baseline-no-sharing` does not contain the equality saturation stage and the synthesis step will fail during to resource limitation.
+Note that `13-vgg-baseline-no-sharing` is not synthesizable so the experiment will trigger an error and produce no performance number.
 The ``stencil`` experiments usaully need 2-3 hours. 
 The ``vgg``, ``tinyyolo``, ``self-attention`` tests may take 7-12 hours.
