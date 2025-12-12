@@ -66,6 +66,9 @@ RUN cd /workspace/shir-new-test-tag && sbt test:compile \
 # COPY --chown=${USERNAME}:${USERNAME} . /workspace
 COPY . /workspace
 
+# Set up permission
+RUN chmod -R 777 /workspace
+
 # Default command: run all eqsat and lowering.
 # Results are written to /workspace/results.
 CMD ["/bin/bash", "-lc", "set -euo pipefail; python3 evaluation.py"]

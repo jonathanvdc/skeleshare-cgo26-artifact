@@ -104,6 +104,7 @@ def copy_relative_paths(src_root: str, rel_paths: Set[str], dst_root: str) -> No
         dst = os.path.join(dst_root, rel)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         shutil.copy2(src, dst)
+    os.chmod(dst, 0o777)
 
 
 def run_sbt_test(repo_dir: str, test_path: str, expect_failure: bool = False) -> None:
@@ -189,6 +190,7 @@ def run_lowering_phase(exp: Experiment, cfg: PhaseConfig) -> None:
             shutil.copytree(s, d)
         else:
             shutil.copy2(s, d)
+    os.chmod(dest, 0o777)
 
 
 EXPERIMENTS: List[Experiment] = [
