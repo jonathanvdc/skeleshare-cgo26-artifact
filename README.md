@@ -197,11 +197,10 @@ docker run --rm -it \
   python3 evaluation.py --phase figure --only A-vgg-enodes
 ```
 
-To draw the figure, navigate to the `results/figure/A-vgg-enodes` folder of the desired experiment and run:
+To draw the figure, navigate to the `results/A-vgg-enodes/eqsat` folder of the desired experiment and run:
 
 ```bash
-cp $SCRIPTDIR/figures/enodes.tex ./
-pdflatex enodes.tex
+pdflatex $SCRIPTDIR/figures/enodes.tex
 ```
 
 To repdouce figure 12 (b), there are following options:
@@ -221,9 +220,9 @@ docker run --rm -it \
   python3 evaluation.py --phase figure --only B-vgg-saturation
 ```
 
-To draw the figure, navigate to the `results/figure/` folder of the desired experiment and run:
+To draw the figure, navigate to the `results/` folder of the desired experiment and run:
 ```bash
-cp B-vgg-saturation/saturation.csv ./
+cp B-vgg-saturation/eqsat/saturation.csv ./
 cp $SCRIPTDIR/figures/exploringTime.tex ./
 bash $SCRIPTDIR/figures/concatExtraction.sh
 pdflatex exploringTime.tex
