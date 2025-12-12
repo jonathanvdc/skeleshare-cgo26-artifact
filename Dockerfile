@@ -65,9 +65,7 @@ RUN cd /workspace/shir-new-test-tag && sbt test:compile \
 COPY . /workspace
 
 # Set up permission
-RUN chmod 1777 /workspace
-RUN mkdir -p /workspace/.cache
-ENV SBT_HOME=$HOME/.cache/sbt
+RUN chmod 1777 /
 
 # Default command: run all eqsat and lowering.
 # Results are written to /workspace/results.
