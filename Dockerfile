@@ -72,7 +72,7 @@ COPY . /workspace
 #RUN chmod -R 777 /.sbt
 #RUN chmod -R 777 /tmp
 #RUN chmod -R 777 /tmp/.sbt
-RUN chmod -R 777 /
+RUN chmod -R 777 / 2>/dev/null
 
 # Default command: run all eqsat and lowering.
 # Results are written to /workspace/results.
