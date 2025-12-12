@@ -68,6 +68,8 @@ COPY . /workspace
 RUN chmod 1777 /workspace
 RUN mkdir /.cache
 RUN chmod 1777 /.cache
+RUN mkdir /.sbt
+RUN chmod 1777 /.cache
 
 # Default command: run all eqsat and lowering.
 # Results are written to /workspace/results.
