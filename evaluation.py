@@ -514,7 +514,7 @@ def main() -> None:
             print(f"\n==== Lowering phase: {exp.id} has no lowering configuration; skipping ====")
 
         if args.phase in ("figure") and exp.figure is not None:
-            run_lowering_phase(exp, exp.figure)
+            run_eqsat_phase(exp, exp.figure)
         elif args.phase in ("lowering", "both") and exp.figure is None:
             print(f"\n==== Lowering phase: {exp.id} has no lowering configuration; skipping ====")
 
