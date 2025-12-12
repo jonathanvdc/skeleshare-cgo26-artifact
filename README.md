@@ -81,33 +81,31 @@ docker run --rm -it \
   ghcr.io/jonathanvdc/skeleshare-cgo26-artifact:latest
 ```
 
-This will invoke the evaluation script to produce a VHDL design for each experiment to which equality saturation finds a solution.
-The VHDL code for each experiment is stored in:
+Running the container invokes the evaluation script, which generates a VHDL design for each experiment where equality saturation produces a valid solution. 
+The resulting VHDL for each experiment is stored in:
 
 ```
 ./results/<experiment-id>/lowering/
 ```
-
-After running the container, the following folder will be created as well and contain the required hardware wrapper and environment setup files to run synthesis.
+After running the container, the script folder is created that contains the hardware wrapper and the required environment setup files for synthesis.
 ```
 ./results/scripts
 ```
 
-Before moving to the next step, please running the following command to ensure the script files are reachable. The command ``echo $SCRIPTDIR`` should include the absolute path to the ``scripts`` folder
+Before moving to the next step, please run the following command to confirm that the script directory is correctly set and reachable. The output of ``echo $SCRIPTDIR`` should be the absolute path to the ``scripts`` folder:
 ```
 export SCRIPTDIR=$(pwd)/results/scripts
 echo $SCRIPTDIR
 ```
 
-### 4. Running Synthesized Designs
+### 4. Running synthesized designs
 
-Since synthesis typically takes between **4 to 8 hours** for each benchmark in the paper, we provide pre-synthesized designs that correspond exactly to the generated VHDL files for each experiment.
-These can be found under:
+Because synthesis typically takes **4–8 hours per benchmark** in the paper, we provide pre-synthesized designs that correspond exactly to the VHDL generated for each experiment. These can be found under:
 ```bash
 /mnt/sdc1/examples/cgo26_ae/<experiment-id>/
 ```
 
-To directly execute an experiment's pre-synthesized hardware design on the FPGA board, navigate to the experiment's directory and run the following commands:
+To run an experiment using its pre-synthesized hardware design on the FPGA board, go to the corresponding experiment directory and execute the following commands:
 
 ```bash
 source $SCRIPTDIR/profile
@@ -117,13 +115,13 @@ source $SCRIPTDIR/profile
 
 ### 5. Results
 
-Finally, run the following script to summarize logic, RAM usage, DSP usage, and GOPS measurements taken in the previous step.
+Finally, run the following script to summarize the logic, RAM, and DSP utilization, along with the GOPS measurements collected in the previous step.
 
 ```bash
 bash $SCRIPTDIR/scores/<experiment-id>.sh
 ```
 
-The output adheres to the following format, which can be cross-referenced with Table III from the paper.
+The output adheres to the following format and can be directly cross-referenced with Table III in the paper.
 
 ```
 Logic utilization (in ALMs) : 207,520 / 427,200 ( 49 % )
@@ -136,14 +134,14 @@ GOP/s : 169.936
 
 ## Additional Options (Table III)
 
-The commands above reproduce the default artifact workflow, but the evaluation harness also supports several optional paths.
-These include re-running equality saturation from scratch, re-synthesizing hardware designs with Quartus, or executing only a selected subset of experiments.
-The options below are independent of the main workflow and can be used as needed to inspect intermediate outputs.
+The commands above follow the default artifact workflow. 
+In addition, the evaluation harness supports several optional paths, such as re-running equality saturation from scratch, re-synthesizing designs with Quartus, or running only a selected subset of experiments. 
+These options are independent of the main workflow and can be used as needed to inspect intermediate outputs.
 
-### Re-Running Equality Saturation
+### Re-running equality saturation
 
-Since optimizing each benchmark using equality saturation takes multiple hours, the commands above use a precomputed solution embedded in the container.
-To recompute this solution and place it in `./results/<experiment-id>/eqsat/`, run:
+Because optimizing each benchmark with equality saturation can take multiple hours, the commands above use a precomputed solution embedded in the container. 
+To recompute the solution and save it under `./results/<experiment-id>/eqsat/`, run:
 
 ```bash
 docker run --rm -it \
@@ -161,11 +159,10 @@ docker run --rm -it \
 
 Note that running all the experiments may take at least 15 hours.
 
-### Re-Running Synthesis
+### Re-running synthesis
 
-The server stores pre-synthesized designs corresponding to the generated VHDL files for each experiment.
-To re-synthesize these designs for an experiment after Step 3, use Quartus.
-For each experiment, navigate to the `results/lowering` folder of the desired experiment and run:
+The server also provides pre-synthesized designs that correspond to the generated VHDL for each experiment. 
+To re-synthesize an experiment after Step 3 using Quartus, navigate to the experiment’s `results/lowering` directory and run:
 
 ```bash
 source $SCRIPTDIR/profile
@@ -174,13 +171,14 @@ mkdir hw/rtl/generated
 mv *.vhd *.dat hw/rtl/generated/
 ```
 
-This prepares all required files for Quartus synthesis. Now, start the synthesis for the current experiment:
+This step prepares all required files for Quartus synthesis. You can now start synthesis for the current experiment:
 
 ```bash
 ./real.sh
 ```
 
-Synthesis typically takes 4 to 8 hours to complete. After it finishes, you can run the design on the FPGA board using:
+Synthesis typically takes 4–8 hours. Once it completes, you can run the design on the FPGA board using:
+
 ```bash
 ./real_start.sh
 ./real_sw.sh
@@ -188,7 +186,8 @@ Synthesis typically takes 4 to 8 hours to complete. After it finishes, you can r
 
 ## Step-By-Step Instructions (Figure 12)
 
-To repdouce, figure 12 (a), please run the following commands to get the data points for enode numbers:
+
+To reproduce Figure 12(a), run the following commands to extract the data points for the e-node counts:
 
 ```bash
 docker run --rm -it \
@@ -197,21 +196,22 @@ docker run --rm -it \
   python3 evaluation.py --phase figure --only A-vgg-enodes
 ```
 
-To draw the figure, navigate to the `results/A-vgg-enodes/eqsat` folder of the desired experiment and run:
+To generate the figure, navigate to the experiment’s `results/A-vgg-enodes/eqsat` directory and run:
 
 ```bash
 pdflatex $SCRIPTDIR/figures/enodes.tex
 ```
 
-To repdouce figure 12 (b), there are following options:
+To reproduce Figure 12(b), the artifact provides the following experiment options:
 - `B-vgg-saturation`
 - `B-vgg-extraction-1to5`
 - `B-vgg-extraction-$id` ($id = 6 ~ 14)
 
-Since running the whole experiment will take several days, we partition the experiment into several move steps.
-`B-vgg-saturation` produces the saturation curve in figure 12 (b). 
-`B-vgg-extraction-1to5`, `B-vgg-extraction-6`, ..., and `B-vgg-extraction-14` produce the extraction curve in figure 12 (b). 
-Note that `B-vgg-extraction-7` to `B-vgg-extraction-14` will reach the run time cut-off and therefore produce similar run time (180 minutes).
+
+Since running the full experiment end-to-end can take several days, we split it into multiple smaller steps.
+`B-vgg-saturation` generates the saturation curve shown in Figure 12(b).
+The extraction curve in Figure 12(b) is generated by `B-vgg-extraction-1to5`, `B-vgg-extraction-6`, ..., `B-vgg-extraction-14`.
+Note that `B-vgg-extraction-7` through `B-vgg-extraction-14` hit the runtime cutoff and therefore report similar runtimes (180 minutes).
 
 ```bash
 docker run --rm -it \
@@ -220,7 +220,8 @@ docker run --rm -it \
   python3 evaluation.py --phase figure --only B-vgg-saturation
 ```
 
-To draw the figure, navigate to the `results/` folder of the desired experiment and run:
+To generate the plot, go to the experiment’s `results/` directory and run:
+
 ```bash
 cp B-vgg-saturation/eqsat/saturation.csv ./
 cp $SCRIPTDIR/figures/exploringTime.tex ./
@@ -228,7 +229,7 @@ bash $SCRIPTDIR/figures/concatExtraction.sh
 pdflatex exploringTime.tex
 ```
 
-### Running only selected experiments
+## Running Selected Experiments
 
 You may restrict execution to a comma‑separated list of experiment IDs, e.g.:
 
@@ -256,8 +257,8 @@ These experiment IDs are:
 - `B-vgg-extraction-1to5`
 - `B-vgg-extraction-$id` ($id = 6 ~ 14)
 
-Note experiments `10-vgg-no-sharing`, `11-vgg-no-padding`, and `12-vgg-no-tiling` will trigger erros during the equality saturation stage. Therefore, there is no lowering stage for them. 
-`13-vgg-baseline-no-sharing` does not contain the equality saturation stage and the synthesis step will fail during to resource limitation.
-Note that `13-vgg-baseline-no-sharing` is not synthesizable so the experiment will trigger an error and produce no performance number.
-The ``stencil`` experiments usaully need 2-3 hours. 
-The ``vgg``, ``tinyyolo``, ``self-attention`` tests may take 7-12 hours.
+**Note:**
+- Experiments `10-vgg-no-sharing`, `11-vgg-no-padding`, and `12-vgg-no-tiling` are expected to trigger errors during the equality-saturation stage; as a result, they do not produce a lowering stage.
+- Experiment `13-vgg-baseline-no-sharing` does not include equality saturation, and its synthesis step is expected to fail due to resource limitations.
+- Since `13-vgg-baseline-no-sharing` is not synthesizable, it will trigger an error and produce no performance numbers.
+- In terms of runtime, the ``stencil`` experiments usually take 2–3 hours, while the ``vgg``, ``tinyyolo``, and ``self-attention`` experiments may take 7–12 hours.
