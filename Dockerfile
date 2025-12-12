@@ -71,7 +71,6 @@ RUN chmod -R 777 /.cache
 RUN mkdir /.sbt
 RUN chmod -R 777 /.sbt
 RUN chmod -R 777 /tmp
-RUN mkdir /tmp/.sbt
 RUN chmod -R 777 /tmp/.sbt
 
 # Default command: run all eqsat and lowering.
