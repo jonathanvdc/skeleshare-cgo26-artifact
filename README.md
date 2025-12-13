@@ -266,6 +266,6 @@ These experiment IDs are:
 
 **Note:**
 - Experiments `10-vgg-no-sharing`, `11-vgg-no-padding`, and `12-vgg-no-tiling` are expected to trigger errors during the equality-saturation stage; as a result, they do not produce a lowering stage.
-- Experiment `13-vgg-baseline-no-sharing` does not include equality saturation, and its synthesis step is expected to fail due to resource limitations.
+- Experiments `9-stencil-baseline` and `13-vgg-baseline-no-sharing` not include equality saturation, and its synthesis step is expected to fail due to resource limitations.
 - Since `13-vgg-baseline-no-sharing` is not synthesizable, it will trigger an error and produce no performance numbers.
 - In terms of runtime, the ``stencil`` experiments usually take 2–3 hours, while the ``vgg``, ``tinyyolo``, and ``self-attention`` experiments may take 7–12 hours.
