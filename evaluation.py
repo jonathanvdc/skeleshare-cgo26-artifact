@@ -328,7 +328,7 @@ EXPERIMENTS: List[Experiment] = [
         ),
         lowering=PhaseConfig(
             branch="new-test-tag",
-            path="src/test/algo/vgg8bits/VggConvFourthDSPTest.scala",
+            path="src/test/algo/vgg8bits/VggFourthDSPTest.scala",
         ),
         figure=None,
     ),
@@ -341,7 +341,7 @@ EXPERIMENTS: List[Experiment] = [
         ),
         lowering=PhaseConfig(
             branch="new-test-tag",
-            path="src/test/algo/vgg8bits/VggConvHalfDSPTest.scala",
+            path="src/test/algo/vgg8bits/VggHalfDspTest.scala",
         ),
         figure=None,
     ),
