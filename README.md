@@ -150,6 +150,7 @@ docker run --rm -it \
   python3 evaluation.py --phase eqsat
 ```
 
+To generate VHDL code and save it under `./results/<experiment-id>/lowering/`, run:
 ```bash
 docker run --rm -it \
   --mount type=bind,src=./results,dst=/workspace/results \
