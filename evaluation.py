@@ -315,7 +315,7 @@ EXPERIMENTS: List[Experiment] = [
         ),
         lowering=PhaseConfig(
             branch="new-test-tag",
-            path="src/test/eqsat/nn/VggConvHalfAbsTest.scala",
+            path="src/test/algo/vgg8bits/VggHalfAbsTest.scala",
         ),
         figure=None,
     ),
