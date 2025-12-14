@@ -105,6 +105,26 @@ Because synthesis typically takes **4–8 hours per benchmark** in the paper, we
 /mnt/sdc1/examples/cgo26_ae/<experiment-id>/
 ```
 
+The pre-synthesized design can also be downloaded from zenodo. The experiments will be located in the ``precomputed`` folder after unzipping the file.
+```bash
+wget https://zenodo.org/records/17925912/files/precomputed.zip
+unzip precomputed.zip
+```
+
+The unzipped pre-synthesized design may have permission issue. Please run the following command to update the permission.
+```bash
+chmod -R 777 ./precomputed
+```
+
+In side each experiment (folder <experiment-id>), the software runtime for each experiment might also need to be updated due to different compiling environment.
+```bash
+cd ./sw
+cmake .
+make clean
+make
+cd ..
+```
+
 To run an experiment using its pre-synthesized hardware design on the FPGA board, go to the corresponding experiment directory and execute the following commands:
 
 ```bash
