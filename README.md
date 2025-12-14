@@ -116,7 +116,7 @@ The unzipped pre-synthesized design may have permission issue. Please run the fo
 chmod -R 777 ./precomputed
 ```
 
-In side each experiment (folder <experiment-id>), the software runtime for each experiment might also need to be updated due to different compiling environment.
+Inside each experiment (folder ``./precomputed/<experiment-id>``), the software runtime for each experiment might also need to be updated due to different compiling environment.
 ```bash
 cd ./sw
 cmake .
