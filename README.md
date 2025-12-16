@@ -65,9 +65,18 @@ ssh -A -J your-username@jump.cs.mcgill.ca your-username@solaire.cs.mcgill.ca
 Once connected, you will have access to all required hardware on our server, including the Intel Arria 10 FPGA board used for the evaluation. You may directly compile and run the provided designs on the physical hardware.
 
 ### 2. Pull the Docker image
+The docker image can be pulled from Github or downloaed from Zenodo.
 
+From Github:
 ```bash
 docker pull ghcr.io/jonathanvdc/skeleshare-cgo26-artifact:latest
+```
+
+From Zenodo:
+```bash
+wget https://zenodo.org/records/17925912/files/skeleshare-cgo26-artifact_image.zip
+unzip ./skeleshare-cgo26-artifact_image.zip
+docker load -i ./skeleshare-cgo26-artifact.tar
 ```
 
 ### 3. Run the container with mounted results
